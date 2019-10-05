@@ -6,6 +6,6 @@ class PokemonsController < ApplicationController
 
   def show
     pokemon = Pokemon.find_by(id: params[:id])
-    rendfer json: pokemon
+    render json: pokemon
   end
 end
