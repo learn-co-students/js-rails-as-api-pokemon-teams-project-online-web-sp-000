@@ -30,6 +30,9 @@ function displayTrainer(trainer){
   const buttonEl = document.createElement("button"); //create button element
   buttonEl.setAttribute("data-trainer-id", trainer.id);
   buttonEl.innerHTML = "Add Pokemon";
+  buttonEl.addEventListener("click", function(e){
+    addPokemon(trainer);
+  });
   divEl.appendChild(buttonEl);
 
   //create list of the Trainer's pokemon
@@ -42,6 +45,9 @@ function displayTrainer(trainer){
     releaseButton.innerHTML = "Release";
     releaseButton.className = "release";
     releaseButton.setAttribute("data-pokemon-id", trainer.pokemons[i].id);
+    releaseButton.addEventListener("click", function(e){
+      deletePokemon(trainer.pokemons[i]);
+    });
     pokemonEl.appendChild(releaseButton);
 
     pokemonList.appendChild(pokemonEl);
@@ -49,4 +55,58 @@ function displayTrainer(trainer){
   divEl.appendChild(pokemonList);
 
   mainEl.appendChild(divEl);
+
+  function addPokemon(trainer){
+    if (trainer.pokemons.length < 6){
+      let pokemon = {
+        "trainer_id": trainer.id
+      };
+  
+      let configObject = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(pokemon)
+      };
+  
+      fetch('http://localhost:3000/pokemons', configObject)
+        .then(resp => resp.json())
+        .then(json => {
+          const pokemonEl = document.createElement("li");
+          pokemonEl.innerHTML = `${json.nickname} (${json.species})`;
+
+          const releaseButton = document.createElement("button");
+          releaseButton.innerHTML = "Release";
+          releaseButton.className = "release";
+          releaseButton.setAttribute("data-pokemon-id", json.id);
+          pokemonEl.appendChild(releaseButton);
+
+          pokemonList.appendChild(pokemonEl);
+        });
+    } else {
+      console.log("Pokemon party is full.");
+    }
+  }
+}
+
+function deletePokemon(pokemon){
+  let pokemonBody = {
+    "pokemon_id": pokemon.id
+  };
+
+  let configObject = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(pokemonBody)
+  };
+
+  fetch("http://localhost:3000/pokemons",configObject)
+    .then(resp => resp.json())
+    .then(json => {
+      let pokeEl = document.querySelector(`[data-pokemon-id="${json.id}"]`);
+      pokeEl.parentElement.remove();
+    });
 }
