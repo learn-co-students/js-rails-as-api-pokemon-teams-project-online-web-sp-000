@@ -41,23 +41,16 @@ function renderTrainersHtml(data) {
         addPokemonButton.setAttribute("data-trainer-id", trainer.id);
         addPokemonButton.innerHTML = "Add Pokemon"
         newTrainer.append(addPokemonButton)
-        // addPokemonButton.addEventListener('click', function(e){
-        //     e.preventDefault();
-        //     addPokemon(trainer);
-        //     debugger
-        //   });
 
         let pokemonList = document.createElement('ul')
         console.log("trainer", trainer.name, trainer.pokemons)
           
         pokemonList.innerHTML = ''
         trainer.pokemons.forEach(pokemon => {
-             pokemonList.innerHTML += `<li>${pokemon.nickname} (${pokemon.species}) <button class="release" data-pokemon-id="${pokemon.id}">Release </button>`
-                  
-        
+             pokemonList.innerHTML += `<li>${pokemon.nickname} (${pokemon.species}) <button class="release" data-pokemon-id="${pokemon.id}">Release </button>`       
         })
-        newTrainer.append(pokemonList)
 
+        newTrainer.append(pokemonList)
 
     })
 }
@@ -71,9 +64,7 @@ function addClickListeners(){
 
     document.querySelectorAll('.add-pokemon').forEach(element => {
         element.addEventListener("click", addPokemon)
-
     })
-
 }
 
 
@@ -82,7 +73,6 @@ function addPokemon() {
     // DOMStringMap {trainerId: "2"}
     // trainerId: "2"
     let trainer_id = parseInt(this.dataset.trainerId)
-
 
 //     #=> Example Request
 // POST /pokemons
@@ -118,7 +108,6 @@ function addPokemon() {
           //trainer.parentElement is div for trainer
           let ulEl = trainerEl.parentElement.querySelector('ul')
           ulEl.innerHTML += `<li>${json.nickname} (${json.species}) <button class="release" data-pokemon-id="${json.id}">Release </button>`
-
       })
 
 

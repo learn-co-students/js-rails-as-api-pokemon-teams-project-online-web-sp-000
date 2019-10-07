@@ -1,6 +1,7 @@
 class PokemonsController < ApplicationController
 
     require 'faker'
+
     def create
         trainer = Trainer.find_by(id: params[:trainer_id])
         name = Faker::Name.first_name
