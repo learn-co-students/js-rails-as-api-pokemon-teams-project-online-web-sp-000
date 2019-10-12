@@ -83,6 +83,7 @@ function addPokemonToList(object, div) {
   div.appendChild(ul)
 }
 
+
 function createPokemonList(trainer, div) {
   const trainerURL = TRAINERS_URL + `/${trainer["id"]}`
   fetchPokemon(trainerURL, div)
