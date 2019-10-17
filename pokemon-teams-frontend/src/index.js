@@ -58,10 +58,31 @@ function addPokemon(trainerId) {
       "trainer_id": `${trainerId}`
     })
   };
-  fetch("http://localhost:3000/pokemons", configObject);
+  fetch(POKEMONS_URL, configObject)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      newPokemon = json;
+      trainerCard = document.querySelector(`*[data-trainer-id='${trainerId}']`).parentElement;
+      if (newPokemon) {
+        addPokemonToCard(newPokemon, trainerCard);
+      }
+    })
 }
 
-fetch("http://localhost:3000/trainers")
+function removePokemon(pokemonId) {
+  fetch(`${POKEMONS_URL}/${pokemonId}`, { method: 'DELETE' })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      removedPokemon = json;
+      document.querySelector(`*[data-pokemon-id='${removedPokemon.id}']`).parentElement.remove();
+    })
+}
+
+fetch(TRAINERS_URL)
   .then(function(response) {
   	return response.json();
   })
@@ -79,12 +100,13 @@ document.addEventListener("click", function(e) {
     buttonClicked = e.target;
     if (buttonClicked.innerText == "Release") {
       // Action for Release Button Clicked: send a "DELETE" request with the format "DELETE /pokemons/:pokemon_id"
-      console.log(`Release button clicked for ${buttonClicked.parentElement.innerText.split(" ")[0]}`);
+      pokemonId = buttonClicked.getAttribute("data-pokemon-id");
+      removePokemon(pokemonId);
     }
     if (buttonClicked.innerText == "Add Pokemon")
     {
       trainerId = buttonClicked.getAttribute("data-trainer-id");
-      addPokemon("data-trainer-id");
+      addPokemon(trainerId);
     }
   }
 })

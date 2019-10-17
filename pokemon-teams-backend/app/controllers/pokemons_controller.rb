@@ -1,11 +1,13 @@
 class PokemonsController < ApplicationController
   def create
-    new_pokemon = Pokemon.new
-    new_pokemon.nickname = Faker::Name.first_name
-    new_pokemon.species = Faker::Games::Pokemon.name
-    new_pokemon.trainer_id = params[:id]
-    new_pokemon.save
+    new_pokemon = Pokemon.generate_new(params["trainer_id"])
     render json: PokemonSerializer.new(new_pokemon).to_serialized_json
+  end
+
+  def destroy
+    dead_pokemon = Pokemon.find(params["id"])
+    render json: PokemonSerializer.new(dead_pokemon).to_serialized_json
+    Pokemon.destroy(dead_pokemon.id)
   end
 end
 
