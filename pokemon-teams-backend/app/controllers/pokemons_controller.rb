@@ -16,5 +16,4 @@ class PokemonsController < ApplicationController
     destroyed_pokemon = pokemon.delete
     render json: PokemonSerializer.new( destroyed_pokemon ).to_serialized_json
   end
-
 end

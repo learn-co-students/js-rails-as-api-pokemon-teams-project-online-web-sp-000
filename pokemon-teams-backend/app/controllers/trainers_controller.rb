@@ -3,7 +3,6 @@ class TrainersController < ApplicationController
   ## nested with pokemon names and id
   def index
     trainers = Trainer.all
-
     render json: TrainerSerializer.new( trainers ).to_serialized_json
   end
 
