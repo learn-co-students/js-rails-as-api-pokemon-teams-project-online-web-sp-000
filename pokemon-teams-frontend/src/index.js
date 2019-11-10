@@ -88,10 +88,13 @@ fetch(TRAINERS_URL)
         })
         .then(function(json){
             console.log(json);
-            console.log(pokemon.id)
-            //debugger
-            let destroyedPokemon = document.querySelector("[data-pokemon-id=pokemon.id]");
+            console.log(json.id)
             
-            destroyedPokemon.remove();
+            let destroyedPokemonButton = document.querySelector(`button[data-pokemon-id='${json.id}']`);
+            console.log(destroyedPokemonButton);
+            destroyedPokemonButton.parentElement.remove();
+
+            
+            //destroyedPokemon.remove();
         })
     }
