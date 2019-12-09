@@ -2,59 +2,76 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
-fetch (TRAINERS_URL).then((res)=>res.json()).then((json)=>{
+const main=document.querySelector('main')
 
-  json.data.forEach(function(item){
-    const div=document.createElement('div')
-    const main=document.querySelector('main')
-    main.appendChild(div)
-    div.className="card"
-    div.setAttribute("data-id",item.id)
-    div.innerHTML=`<p>${item.attributes.name}</p>`
-    const btn=document.createElement('button')
-    div.appendChild(btn)
-    btn.innerHTML="Add Pokemon"
-    btn.setAttribute("data-trainer-id",item.id)
-    btn.addEventListener('click',(e)=>{
-    let trainerId=div.getAttribute("data-id")
+fetch(TRAINERS_URL)
+  .then(res=>res.json())
+  .then(json=>{
+    json.data.forEach(card)
+  })
 
-      let configObj = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({trainer_id: trainerId})
-      }
+function card(trainer) {
+  const div=document.createElement('div')
+  const addBtn=document.createElement('button')
 
-      fetch(POKEMONS_URL, configObj).then((res)=>(res.json()))
+  const pokemons=trainer.attributes.pokemons
+  main.appendChild(div)
+  div.innerHTML=`<p>${trainer.attributes.name}</p>`
+  div.className='card'
+  div.setAttribute('data-id', trainer.id);
+  div.appendChild(addBtn)
+  addBtn.innerHTML='Add Pokemon'
+  addBtn.setAttribute('data-trainer-id', trainer.id);
+  ul=document.createElement('ul')
+  div.appendChild(ul)
+  pokemons.forEach((i)=>{
+    ul.innerHTML+=`<li>${i.nickname} (${i.species}) <button class="release" data-pokemon-id=${i.id}>Release</button></li>`
+  })
+  addBtn.addEventListener('click',addPokemon)
+  document.querySelectorAll('.release').forEach(btn=>{
+    btn.addEventListener('click',release)
+  })
+}
 
-      location.reload();
-    })
+function addPokemon(event) {
+  fetch(POKEMONS_URL,{
+    method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
 
-
-    const ul=document.createElement('ul')
-    div.appendChild(ul)
-      item.attributes.pokemons.forEach(function (i) {
-        const li=document.createElement('li')
-        ul.appendChild(li)
-        li.innerHTML=i.nickname
-        release_btn=document.createElement('button')
-        li.appendChild(release_btn)
-        release_btn.className="release"
-        release_btn.innerHTML="Release"
-        release_btn.setAttribute("data-pokemon-id",i.id)
-        release_btn.addEventListener('click',(e)=> {
-          pokemon_id=e.target.getAttribute("data-pokemon-id")
-          let configObj = {
-            method: "delete"
-          }
-
-          fetch(POKEMONS_URL+`/${pokemon_id}`, configObj).then((res)=>(res.json()))
-
-        })
+      body :JSON.stringify({
+        trainer_id:event.target.getAttribute("data-trainer-id")
 
       })
   })
+    .then(res=>res.json())
+    .then(json=>{
+      const ulElement=event.target.nextSibling
+      if (ulElement.childElementCount<6) {
+        const li=document.createElement('li')
+        const btn=document.createElement('button')
+        ulElement.appendChild(li)
+        li.appendChild(btn)
+        btn.className='release'
+        btn.innerHTML='Release'
+        li.innerHTML+=`${json.nickname} (${json.species})`
+      }
 
-})
+    })
+}
+
+function release(event) {
+  const id=event.target.getAttribute('data-pokemon-id')
+  fetch(`${POKEMONS_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {'content-type': 'application/json'},
+  }).then(res=>res.json())
+    .then(json=>{
+
+      const liElement=event.target.parentElement
+      liElement.remove();
+    })
+
+}
