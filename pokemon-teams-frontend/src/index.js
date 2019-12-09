@@ -56,6 +56,7 @@ function addPokemon(event) {
         li.appendChild(btn)
         btn.className='release'
         btn.innerHTML='Release'
+        btn.setAttribute('data-pokemon-id', json.id)
         li.innerHTML+=`${json.nickname} (${json.species})`
       }
 
