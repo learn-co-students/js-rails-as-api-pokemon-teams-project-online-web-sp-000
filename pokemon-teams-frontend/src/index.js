@@ -14,8 +14,23 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 // </div>
 
 // sample card for each trainer
-
+let card;
 document.addEventListener('DOMContentLoaded', () =>{
   // load content here
-  
+  card = document.body.getElementsByClassName("card")[0]
+
+  card.addEventListener("click", event => {
+    // grabs the pokemon id that needs to be released
+    if (event.target.getAttribute("data-pokemon-id") != null) {
+      let ulParent = event.target.parentNode.parentNode
+      // console.log(event.target.parentNode)
+      // update database via rails API
+      ulParent.removeChild(event.target.parentNode)
+      // just need to send data to update database
+    }
+  })
 })
+
+// need a function for releasing pokemons
+
+// need a function for adding pokemons to the correct Trainer
