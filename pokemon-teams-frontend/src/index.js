@@ -67,10 +67,11 @@ function addFunctionality(card) {
       if (event.target.parentNode.querySelector("ul").childElementCount < 8) {
         addRandomPokemon(event.target.getAttribute("data-trainer-id"))
          .then(pokemon => {
+           console.log(pokemon)
            let pokemonUl = event.target.parentNode.querySelector("ul");
            let pokemonLi = document.createElement("li");
            pokemonLi.innerHTML =
-           `${pokemon.data.attributes.nickname} (${pokemon.data.attributes.species}) <button class="release" data-pokemon-id="${pokemon.id}">Release</button>`
+           `${pokemon.data.attributes.nickname} (${pokemon.data.attributes.species}) <button class="release" data-pokemon-id="${pokemon.data.id}">Release</button>`
            pokemonUl.appendChild(pokemonLi);
          });
       } else {
@@ -83,7 +84,7 @@ function addFunctionality(card) {
 /////////////////////////////
 
 function addRandomPokemon(trainerId) {
-  // only run this function if trainer has less than 5 pokemons
+  // only run this function if trainer has less than 8 pokemons
   let formData = {
     trainer_id: trainerId
   };
