@@ -19,7 +19,7 @@ function addTrainers() {
     })
     .then(trainers => {
       trainers.data.forEach(pokemonTrainer =>{
-        populateTrainerElements(pokemonTrainer)
+        populateTrainerElements(pokemonTrainer);
       })
     });
 }
@@ -59,20 +59,19 @@ function addFunctionality(card) {
     // grabs the pokemon id that needs to be released
     if (event.target.getAttribute("data-pokemon-id") != null) {
       // removes DOM
-      let ulParent = event.target.parentNode.parentNode
-      ulParent.removeChild(event.target.parentNode)
+      let ulParent = event.target.parentNode.parentNode;
+      ulParent.removeChild(event.target.parentNode);
       // updates DB
       removePokemon(event.target.getAttribute("data-pokemon-id"))
     } else if (event.target.getAttribute("data-trainer-id") != null) {
-      if (event.target.parentNode.querySelector("ul").childElementCount < 5) {
+      if (event.target.parentNode.querySelector("ul").childElementCount < 8) {
         addRandomPokemon(event.target.getAttribute("data-trainer-id"))
          .then(pokemon => {
-           console.log(pokemon)
-           let pokemonUl = event.target.parentNode.querySelector("ul")
-           let pokemonLi = document.createElement("li")
+           let pokemonUl = event.target.parentNode.querySelector("ul");
+           let pokemonLi = document.createElement("li");
            pokemonLi.innerHTML =
            `${pokemon.data.attributes.nickname} (${pokemon.data.attributes.species}) <button class="release" data-pokemon-id="${pokemon.id}">Release</button>`
-           pokemonUl.appendChild(pokemonLi)
+           pokemonUl.appendChild(pokemonLi);
          });
       } else {
         console.log("Max Pokemons Reached!");
