@@ -25,9 +25,7 @@ function addTrainersToDom(json){
         let button = document.createElement('button')
         button.setAttribute("data-trainer-id",trainer.id)
         button.innerText = "Add Pokemon"
-        button.addEventListener("click",function(e){
-            console.log("add button to add pokemon!")
-        })
+        button.addEventListener("click",function(e){ addPokemon(e)})
 
         let ul = document.createElement('ul')
         let array = trainer.relationships.pokemons.data
@@ -38,44 +36,43 @@ function addTrainersToDom(json){
         }
 
         function addLiTODom(json){
+            debugger
             let nickname = json.data.attributes.nickname
             let species = json.data.attributes.species
             let liText = nickname + `(${species})`
             let li = document.createElement('li')
             li.innerText = liText
-
+        
             let button = document.createElement("button")
             button.setAttribute("class", "release")
             button.setAttribute("data-pokemon-id",json.data.id)
             button.innerText = "Release"
             button.addEventListener("click", (e)=>{releasePokemon(e)})
-
+        
             li.append(button)
             ul.append(li)
         }
-        
-        function releasePokemon(e){
-            debugger
-            let id = e.target.getAttribute("data-pokemon-id")
-            let obj = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(id)
-            };
-        
-            
-            fetch(`${POKEMONS_URL}/${id}`,obj)
-            .then(resp=>resp.json())
-            .then(json=>console.log(json))
-            .catch(function(error) {
-                alert("Bad things! Ragnarők!");
-                console.log(error.message);
-        })
-    }
 
+        function addPokemon(e){
+            let trainer_id = e.target.getAttribute("data-trainer-id")
+            let obj = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({trainer_id: trainer_id})
+                };
+            
+                
+                fetch(POKEMONS_URL,obj)
+                .then(resp=>resp.json())
+                .then(json=>addLiTODom(json))
+                .catch((error) => {
+                    console.log(error)
+            }) 
+
+        }
 
 
 
@@ -84,4 +81,32 @@ function addTrainersToDom(json){
         document.body.append(div)
     }
 }
-// }
+
+
+
+
+function releasePokemon(e){
+    
+    let id = e.target.getAttribute("data-pokemon-id")
+    let obj = {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify(id)
+    };
+
+    
+    fetch(`${POKEMONS_URL}/${id}`,obj)
+    .then(resp=>resp.json())
+    .then(json=>console.log(json))
+    .catch(function(error) {
+        alert("Bad things!");
+        console.log(error.message);
+})
+   
+    e.target.parentElement.remove()
+
+}
+
