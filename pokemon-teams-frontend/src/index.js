@@ -4,6 +4,7 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 const DELETE_URL = `${BASE_URL}/pokemons`
 const main = document.querySelector('main')
 let newPokemon
+let itemToRemove
 let deleteConfirmation
 let referencedCard = ""
 let unorderedList
@@ -57,9 +58,8 @@ function createPokemon(id) {
  
   referencedCard = document.querySelectorAll(`[data-id = "${id}"]`)[0].querySelector("ul")
 
-  console.log(`the referencedCard is ${referencedCard}`)
   if (referencedCard.childElementCount > 5){
-    console.log(referencedCard),
+    
     console.log("you're full!")
   } else {
     let idData = {
@@ -110,47 +110,36 @@ function createNewListing(critter, referencedCard) {
    return   referencedCard.appendChild(newListing)
 }
 
-
-
-
-
-
 function destroyPokemon(id) {
-  //still need to build
-console.log(`deleting pokemon with id ${id}`)
-
-let idData = {
-  "id": id
-};
-
-let deletionObject  = {
-  method: "DELETE",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  },
-  body: JSON.stringify(idData)
-}
-
-fetch(`${POKEMONS_URL}/${id}`, deletionObject).then(function(response) {
-  console.log(this)
-  let deadCritter = document.find
   
+  let idData = {
+    "id": id
+  };
+  
+  let deletionObject  = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(idData)
+  }
+  
+  fetch(`${POKEMONS_URL}/${id}`, deletionObject).then(function(response) {
+    deleteConfirmation = response
+    if (response["ok"] === true) {
+      console.log("success!")
+      itemToRemove = document.querySelectorAll(`[data-pokemon-id="${id}"]`);
+      let target = itemToRemove[0].parentElement
+      let parentTarget = target.parentElement
+      parentTarget.removeChild(target)
+
+  } else {
+    console.log("failed!")
+  }
+
+ 
 })
-.then(function(object) {
-  deleteConfirmation = object
-  console.log("inside the deleter")
-  console.log(object)
-
-}); 
-
-
-
-
-
-
 }
-
-
 
 dataFound()

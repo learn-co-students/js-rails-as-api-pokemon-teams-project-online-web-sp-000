@@ -12,7 +12,7 @@ end
   def destroy
   pokemon = Pokemon.find(params[:id])
   pokemon.delete
-   render json: "Destroyed!"
+  #  render json: 
   end
 
 end
