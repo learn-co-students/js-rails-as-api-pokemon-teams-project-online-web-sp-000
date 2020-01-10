@@ -4,6 +4,7 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 const DELETE_URL = `${BASE_URL}/pokemons`
 const main = document.querySelector('main')
 let newPokemon
+let deleteConfirmation
 let referencedCard = ""
 let unorderedList
 const mainCard = document.getElementsByClassName("card")
@@ -91,16 +92,17 @@ function addPokemon(newPokemon, referencedCard) {
 }
  
 function createNewListing(critter, referencedCard) {
+  let pokemonId = `${critter["id"]}`
+  let pokemonNickName = `${critter["nickname"]}`
+  let pokemonSpecies = `${critter["species"]}`
   let newListing = document.createElement('li')
+  newListing.innerText = `${pokemonNickName} (${pokemonSpecies})`
  
-      newListing.innerText = `${critter["nickname"]} (${critter["species"]})`
-      
-      let deleteCritterButton = document.createElement("button")
+  let deleteCritterButton = document.createElement("button")
+  
       deleteCritterButton.className = "release"
-      console.log(critter["id"])
-      console.log(critter["nickname"])
-      console.log(critter["species"])
       deleteCritterButton.setAttribute("data-pokemon-id", `${critter["id"]}`)
+
       deleteCritterButton.innerText = "Delete Pokemon"
       deleteCritterButton.addEventListener("click", function() {destroyPokemon(critter["id"])})
     
@@ -109,10 +111,46 @@ function createNewListing(critter, referencedCard) {
 }
 
 
+
+
+
+
 function destroyPokemon(id) {
+  //still need to build
 console.log(`deleting pokemon with id ${id}`)
+
+let idData = {
+  "id": id
+};
+
+let deletionObject  = {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(idData)
+}
+
+fetch(`${POKEMONS_URL}/${id}`, deletionObject).then(function(response) {
+  console.log(this)
+  let deadCritter = document.find
+  
+})
+.then(function(object) {
+  deleteConfirmation = object
+  console.log("inside the deleter")
+  console.log(object)
+
+}); 
+
+
+
+
+
+
 }
 
 
-dataFound()
 
+dataFound()
