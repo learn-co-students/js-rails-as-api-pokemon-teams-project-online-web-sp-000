@@ -1,3 +1,4 @@
+//todo const faker = require('faker');
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
@@ -37,10 +38,12 @@ function showCards(divs){
 }
 
 function postPokemon(pokemon, trainer_id){
-  console.log(pokemon);
-  trainer = trainerJsonVar[trainer_id];
-  //console.log(trainer.pokemons);
-  console.log(trainer);
+  console.log("pokemonId: " + JSON.stringify(pokemon["pokemonId"]) + " Species: " + JSON.stringify(pokemon["species"]));
+  console.log("pokemon: " + JSON.stringify(pokemonJsonVar[pokemon["pokemonId"]-1]));
+  console.log("logTrainerId: " + trainer_id);
+  trainer = trainerJsonVar[trainer_id-1];
+  console.log(trainer.pokemons);
+  console.log("logTrainer: " + JSON.stringify(trainer));
   trainer.pokemons.push(pokemon);
   console.log(trainer);
 
@@ -53,19 +56,22 @@ function postPokemon(pokemon, trainer_id){
     body: JSON.stringify(trainer)
   }
   fetch(TRAINERS_URL, configData)
-  .then()
-  .then()
-  .catch();
+    .then((res) => res.json())
+    .then((data) =>  console.log(data))
+    .catch((err)=>console.log(err));
 }
 
 function catchPokemon(){
-  pokemonId = Math.floor(Math.random() * 11);
+  let newPokemon = {};
+  newPokemon["pokemonId"] = pokemonJsonVar.length;
+  newPokemon["species"] = pokemonJsonVar[Math.floor(Math.random() * 28)]["species"];
+  newPokemon["nickname"] = faker.name.firstName();
 
-  return pokemonJsonVar[pokemonId];
+  return newPokemon;
 }
 
 function addPokemon(){
-  //console.log("add clicked");
+  console.log("add clicked");
   //console.log(trainerJsonVar);
 
   if (trainerJsonVar[this.getAttribute('data-trainer-id')].pokemons.length < 6){ //if there are < 7 pokemon/li elements
