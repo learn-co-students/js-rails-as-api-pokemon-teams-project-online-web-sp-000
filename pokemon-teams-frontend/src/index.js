@@ -39,12 +39,12 @@ function showCards(divs){
 
 function postPokemon(pokemon, trainer_id){
   console.log("pokemonId: " + JSON.stringify(pokemon["pokemonId"]) + " Species: " + JSON.stringify(pokemon["species"]));
-  console.log("pokemon: " + JSON.stringify(pokemonJsonVar[pokemon["pokemonId"]-1]));
   console.log("logTrainerId: " + trainer_id);
   trainer = trainerJsonVar[trainer_id-1];
-  console.log(trainer.pokemons);
-  console.log("logTrainer: " + JSON.stringify(trainer));
+  //console.log("logTrainerPokemon: " + JSON.stringify(trainer.pokemons));
+  //console.log("logTrainer: " + JSON.stringify(trainer));
   trainer.pokemons.push(pokemon);
+  console.log("logTrainerPushed: " + JSON.stringify(trainer));
   console.log(trainer);
 
   configData = {
@@ -54,8 +54,8 @@ function postPokemon(pokemon, trainer_id){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(trainer)
-  }
-  fetch(TRAINERS_URL, configData)
+  };
+  fetch(TRAINERS_URL + "/" + trainer_id, configData)
     .then((res) => res.json())
     .then((data) =>  console.log(data))
     .catch((err)=>console.log(err));
@@ -65,7 +65,7 @@ function catchPokemon(){
   let newPokemon = {};
   newPokemon["pokemonId"] = pokemonJsonVar.length;
   newPokemon["species"] = pokemonJsonVar[Math.floor(Math.random() * 28)]["species"];
-  newPokemon["nickname"] = faker.name.firstName();
+  newPokemon["nickname"] = "It doesn't matter";
 
   return newPokemon;
 }
