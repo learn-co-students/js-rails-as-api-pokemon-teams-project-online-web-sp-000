@@ -7,9 +7,11 @@ class TrainersController < ApplicationController
   end
 
   def show
+    trainer = Trainer.find_by(params[:id])
+    render json: trainer, include: [:pokemons]
   end
 
   def create
-    
+
   end
 end

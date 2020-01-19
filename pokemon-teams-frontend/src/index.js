@@ -50,7 +50,7 @@ function postPokemon(pokemon, trainer_id){
   configData = {
     method: 'post',
     headers: {
-      'Accept': 'application/json',
+      //'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(trainer)
