@@ -12,6 +12,12 @@ class TrainersController < ApplicationController
   end
 
   def create
+    @pokemon = Pokemon.new(params[:pokemon])
 
+    if @pokemon.save
+      respond_to do |format|
+        format.json{render :json => @pokemon, :status => :created, :location => @pokemon }
+      end
+    end
   end
 end
