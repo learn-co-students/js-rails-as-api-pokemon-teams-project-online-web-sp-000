@@ -55,19 +55,47 @@ function postPokemon(pokemon, trainer_id){
     },
     body: JSON.stringify(trainer)
   };
-  fetch(TRAINERS_URL + "/" + trainer_id, configData)
-    .then((res) => res.json())
-    .then((data) =>  console.log(data))
+  return fetch(TRAINERS_URL, configData)
+    .then(function(res) { return res.json()})
+    .then(function(json) {console.log(data)})
     .catch((err)=>console.log(err));
 }
 
-function catchPokemon(){
+function catchPokemon(trainer_id){
   let newPokemon = {};
-  newPokemon["pokemonId"] = pokemonJsonVar.length;
+
   newPokemon["species"] = pokemonJsonVar[Math.floor(Math.random() * 28)]["species"];
   newPokemon["nickname"] = "It doesn't matter";
 
-  return newPokemon;
+  let formData = null;
+
+  let configData = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({pokemons:{
+        //id: null,
+        species: newPokemon["species"],
+        nickname: newPokemon["nickname"],
+        trainer_id: trainer_id}
+        //created_at: Date(),
+        //updated_at: null}
+
+    })
+  }
+
+  return fetch(POKEMONS_URL, configData)
+  .then(function(res) { return res.json()})
+  .then(function(json) {
+      console.log(json);
+      newPokemon["pokemonId"] = json["id"];
+      console.log(`newPokemon["pokemonId"] : ` + newPokemon["pokemonId"]);
+      postPokemon(newPokemon, trainer_id);
+    })
+    .catch(function(err){console.log(err)});
+
 }
 
 function addPokemon(){
@@ -76,7 +104,7 @@ function addPokemon(){
 
   if (trainerJsonVar[this.getAttribute('data-trainer-id')].pokemons.length < 6){ //if there are < 7 pokemon/li elements
     //console.log(trainerJsonVar[this.getAttribute('data-trainer-id')].pokemons.count);
-    postPokemon(catchPokemon(), this.getAttribute('data-trainer-id'));//get a pokemon //fetch post to add pokemon to
+    catchPokemon(this.getAttribute('data-trainer-id'));//get a pokemon //fetch post to add pokemon to
   }
 
 }

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :pokemons, only: [:index]
+  resources :pokemons, only: [:index, :show, :new, :create]
 
-  resources :trainers, only: [:index, :show, :create]
+  resources :trainers, only: [:index, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #post 'trainers/:id'
-  #post 'trainers/:id' => "forums#create", :as => :create_forum
+  post 'pokemons/' => "pokemons#create"
+  #post 'trainers/:id' => "pokemons#create", :as => :create_forum
 
 
 end
