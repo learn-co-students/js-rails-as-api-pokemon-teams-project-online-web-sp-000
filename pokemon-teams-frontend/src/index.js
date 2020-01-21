@@ -1,4 +1,6 @@
-//todo const faker = require('faker');
+//const req = require([]);
+//const faker = require('faker');
+
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
@@ -64,13 +66,30 @@ function postPokemon(pokemon, trainer_id){
     .catch((err)=>console.log(err));
 }
 
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
 function catchPokemon(trainer_id){
   let newPokemon = {};
 
   newPokemon["species"] = pokemonJsonVar[Math.floor(Math.random() * 28)]["species"];
-  newPokemon["nickname"] = "It doesn't matter";
-  newPokemon["trainer_id"] = trainer_id;
+  newPokemon["nickname"] = "Test";
 
+  fetch("http://faker.hook.io/")
+    .then(function(res) { return res.json()})
+    .then(function(json) {
+      newPokemon["nickname"] = json;
+    }).catch();
+
+  wait(2000); //make syncronous instead
+
+  newPokemon["trainer_id"] = trainer_id;
+  console.log(newPokemon["nickname"]);
   let formData = {pokemons:{
       //id: null,
       species: newPokemon["species"],

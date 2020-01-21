@@ -1,0 +1,20 @@
+{
+  "name": "pokemon-teams-backend",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the\r application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "faker": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
