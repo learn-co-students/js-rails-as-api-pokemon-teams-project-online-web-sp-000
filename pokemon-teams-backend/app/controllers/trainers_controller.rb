@@ -11,17 +11,5 @@ class TrainersController < ApplicationController
     render json: trainer, include: [:pokemons]
   end
 
-  def create
-=begin
-    trainer = Trainer.find_by(params[:id])
-    @pokemon = Pokemon.new(params[:pokemons])
-
-    if @pokemon.save
-      trainer.pokemons << @pokemon
-      respond_to do |format|
-        format.json{render :json => @pokemon, :status => :created, :location => @pokemon }
-      end
-    end
-=end
-  end
+  
 end

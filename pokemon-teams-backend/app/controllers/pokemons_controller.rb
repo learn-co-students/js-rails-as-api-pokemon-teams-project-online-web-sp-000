@@ -8,27 +8,35 @@ class PokemonsController < ApplicationController
 
   def new
     pokemon = Pokemon.new
+
+    render json: pokemon
   end
 
   def create
     #params[:pokemons] = {species: params[:species], nickname: params[:nickname], trainer_id: params[:trainer_id]}
-    pokemon = Pokemon.new(params[:pokemons])
-    if pokemon.save
+    pokemon = Pokemon.new(message_params)
 
-      trainer = Trainer.find_by(params["pokemons"]["trainer_id"])
-        trainer.pokemons << @pokemon
-        #respond_to do |format|
-        #  format.json{render :json => @pokemon, :status => :created, :location => @pokemon }
-        #end
-      #render pokemon
+    if pokemon.save
+      trainer = Trainer.find_by(trainer_id: params[:pokemons][:trainer_id])
+      puts "trainer_id is #{trainer.id}."
+      trainer.pokemons << pokemon
+      render json: pokemon
+    else
+      render "Failed."
     end
 
   end
 
   def show
-    @pokemon = Pokemon.find_by(params[:id])
+    pokemon = Pokemon.find_by(id: params[:id])
 
-    render json: @pokemon
+    render json: pokemon
+  end
+
+  def destroy
+    pokemon = Pokemon.find_by(id: params[:id])
+    pokemon.destroy
+    
   end
 
 
