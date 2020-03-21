@@ -52,8 +52,9 @@ function fetchTrainers() {
   }
 
 function addPokemon(trainer, event) {
-    console.log(event.target)
     event.preventDefault()
+    const pokemonUl = event.target.parentElement.lastChild
+    if(pokemonUl.children.length < 6) {
     fetch(POKEMONS_URL, {
         method: "POST",
         headers: {
@@ -65,8 +66,6 @@ function addPokemon(trainer, event) {
     })
     .then(resp => resp.json())
     .then(newPokemon => {
-        const pokemonUl = event.target.parentElement.lastChild
-        if(pokemonUl.children.length < 6) {
             const pokemonLi = document.createElement('li')
             pokemonLi.innerHTML = `${newPokemon.nickname} (${newPokemon.species})`
             pokemonUl.appendChild(pokemonLi) 
@@ -78,9 +77,8 @@ function addPokemon(trainer, event) {
                 releasePokemon(pokemon, event)
             })
             pokemonLi.appendChild(releaseButton)
-        }
     }) 
-
+    }
 }
 
 function releasePokemon(pokemon, event) {
