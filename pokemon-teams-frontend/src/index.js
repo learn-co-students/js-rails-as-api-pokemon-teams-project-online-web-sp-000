@@ -13,8 +13,6 @@ function fetchTrainers() {
       json.forEach(trainer => {
           addTrainers(trainer)
       })
-      //array of objects
-      //grab parent nodes, add innerHTML, etc- start big and then get into more detail
       })
   }
 
@@ -71,7 +69,6 @@ function addPokemon(trainer, event) {
         if(pokemonUl.children.length < 6) {
             const pokemonLi = document.createElement('li')
             pokemonLi.innerHTML = `${newPokemon.nickname} (${newPokemon.species})`
-            //right here, need to find the ul that corresponds to this specific trainer!!
             pokemonUl.appendChild(pokemonLi) 
             const releaseButton = document.createElement('button')
             releaseButton.classList.add("release")
@@ -82,7 +79,7 @@ function addPokemon(trainer, event) {
             })
             pokemonLi.appendChild(releaseButton)
         }
-    }) //this is adding successfully, but not capping at 6!!! Also requires refresh..?
+    }) 
 
 }
 
