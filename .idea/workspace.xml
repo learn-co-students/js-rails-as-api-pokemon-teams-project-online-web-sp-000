@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="192b5647-1fff-46f9-9203-64fd11461d06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/ronald.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/js-rails-as-api-pokemon-teams-project-online-web-sp-000.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/pokemon-teams-backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/.generators" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/.rakeTasks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/.ruby-version" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/Gemfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/Gemfile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/Rakefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/channels/application_cable/channel.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/channels/application_cable/connection.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/controllers/application_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/controllers/concerns/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/controllers/pokemons_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/controllers/trainers_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/jobs/application_job.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/mailers/application_mailer.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/models/application_record.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/models/concerns/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/models/pokemon.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/models/trainer.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/services/trainer_serializer.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/views/layouts/mailer.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/app/views/layouts/mailer.text.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/bin/bundle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/bin/rails" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/bin/rake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/bin/setup" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/bin/spring" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config.ru" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/application.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/boot.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/cable.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/credentials.yml.enc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/database.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/environment.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/environments/development.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/environments/production.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/environments/test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/application_controller_renderer.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/backtrace_silencers.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/cors.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/filter_parameter_logging.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/inflections.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/mime_types.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/initializers/wrap_parameters.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/locales/en.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/puma.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/routes.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/spring.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/config/storage.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/db/migrate/20200327190919_create_trainers.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/db/migrate/20200327190942_create_pokemons.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/db/schema.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/db/seeds.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/lib/tasks/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/log/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/storage/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/channels/application_cable/connection_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/controllers/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/controllers/pokemons_controller_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/controllers/trainers_controller_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/fixtures/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/fixtures/files/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/fixtures/pokemons.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/fixtures/trainers.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/integration/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/mailers/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/models/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/models/pokemon_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/models/trainer_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/test/test_helper.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/tmp/.keep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pokemon-teams-backend/vendor/.keep" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/pokemon-teams-backend" />
+  </component>
+  <component name="ProjectId" id="1ZipBtdEvosAgmYbiHGGIUh0kg3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.settings.patched" value="true" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
+  </component>
+  <component name="RunManager" selected="Rails.Development: pokemon-teams-backend">
+    <configuration name="Development: pokemon-teams-backend" type="RailsRunConfigurationType" factoryName="Rails">
+      <module name="pokemon-teams-backend" />
+      <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$/../../pokemon-teams-backend" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="0.0.0.0" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Production: pokemon-teams-backend" type="RailsRunConfigurationType" factoryName="Rails">
+      <module name="pokemon-teams-backend" />
+      <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$/../../pokemon-teams-backend" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="0.0.0.0" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="production" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="spec: pokemon-teams-backend" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="pokemon-teams-backend" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$/../../pokemon-teams-backend" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="spec" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE=":rspec " />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TESTOPTS" VALUE="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test: pokemon-teams-backend" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="pokemon-teams-backend" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$/../../pokemon-teams-backend" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="test" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE=":test_unit " />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TESTOPTS" VALUE="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="192b5647-1fff-46f9-9203-64fd11461d06" name="Default Changelist" comment="" />
+      <created>1585331636679</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585331636679</updated>
+      <workItem from="1585331638730" duration="6690000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="779" height="270" key="GridCell.Tab.0.bottom" timestamp="1585335623480">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="779" height="270" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1585335623480" />
+    <state width="779" height="270" key="GridCell.Tab.0.center" timestamp="1585335623479">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="779" height="270" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1585335623479" />
+    <state width="779" height="270" key="GridCell.Tab.0.left" timestamp="1585335623479">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="779" height="270" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1585335623479" />
+    <state width="779" height="270" key="GridCell.Tab.0.right" timestamp="1585335623479">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="779" height="270" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1585335623479" />
+    <state x="67" y="177" key="SettingsEditor" timestamp="1585335872128">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="67" y="177" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1585335872128" />
+  </component>
+</project>
