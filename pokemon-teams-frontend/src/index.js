@@ -29,13 +29,14 @@ function createTrainers(trainers) {
                 return response.json();
             })
             .then(function(object) {
-                console.log(object)
                 ul = document.querySelector("div[data-id='" + trainer.id + "'] ul");
                 li = document.createElement('li')
                 libutton = document.createElement('button')
                 libutton.innerText = "Release"
                 libutton.classList.add("release")
+                libutton.setAttribute('data-pokemon-id', pokemon.id)
                 li.innerText = `${object.species} (${object.nickname})`
+
                 li.appendChild(libutton)
                 ul.appendChild(li)
             });
@@ -62,6 +63,10 @@ function createTrainers(trainers) {
             libutton = document.createElement('button')
             libutton.innerText = "Release"
             libutton.classList.add("release")
+            libutton.setAttribute('data-pokemon-id', pokemon.id)
+            libutton.addEventListener('click', function(event) {
+                releasePokemon(pokemon)
+            })
             li.innerText = `${pokemon.species} (${pokemon.nickname})`
 
             li.appendChild(libutton)
@@ -75,6 +80,24 @@ function createTrainers(trainers) {
 
         main.appendChild(card)
     }
+
+    function releasePokemon(pokemon) {
+        console.log(pokemon)
+        configObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": 'application/json',
+            },
+            body: JSON.stringify(pokemon)
+        }
+
+        fetch(`${POKEMONS_URL}/${pokemon.id}`, configObj)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(object) { console.log(object) })
+    }
+
 
 }
 
