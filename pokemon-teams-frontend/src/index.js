@@ -16,8 +16,6 @@ function createTrainers(trainers) {
     }
 
     function addPokemon(trainer) {
-        alert("I was clicked!");
-
         configObj = {
             method: "POST",
             headers: {
@@ -31,8 +29,15 @@ function createTrainers(trainers) {
                 return response.json();
             })
             .then(function(object) {
-                card = document.querySelector('main')
-                console.log(object);
+                console.log(object)
+                ul = document.querySelector("div[data-id='" + trainer.id + "'] ul");
+                li = document.createElement('li')
+                libutton = document.createElement('button')
+                libutton.innerText = "Release"
+                libutton.classList.add("release")
+                li.innerText = `${object.species} (${object.nickname})`
+                li.appendChild(libutton)
+                ul.appendChild(li)
             });
     }
 
