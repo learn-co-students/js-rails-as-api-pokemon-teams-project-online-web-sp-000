@@ -34,8 +34,11 @@ function createTrainers(trainers) {
                 libutton = document.createElement('button')
                 libutton.innerText = "Release"
                 libutton.classList.add("release")
-                libutton.setAttribute('data-pokemon-id', pokemon.id)
+                libutton.setAttribute('data-pokemon-id', object.id)
                 li.innerText = `${object.species} (${object.nickname})`
+                libutton.addEventListener('click', function(event) {
+                    releasePokemon(object)
+                })
 
                 li.appendChild(libutton)
                 ul.appendChild(li)
@@ -82,7 +85,6 @@ function createTrainers(trainers) {
     }
 
     function releasePokemon(pokemon) {
-        console.log(pokemon)
         configObj = {
             method: "DELETE",
             headers: {
@@ -95,10 +97,11 @@ function createTrainers(trainers) {
             .then(function(response) {
                 return response.json();
             })
-            .then(function(object) { console.log(object) })
+            .then(function(object) {
+                li = document.querySelector("li button[data-pokemon-id='" + pokemon.id + "']").parentNode
+                li.parentNode.removeChild(li)
+            })
     }
-
-
 }
 
 getTrainers()
