@@ -49,6 +49,11 @@ body {
     color: #fff;
     background-color: green;
     border-radius: 10px;
+    float: top;
+  }
+
+  button#release {
+    float: right;
   }
   
   button.release {
