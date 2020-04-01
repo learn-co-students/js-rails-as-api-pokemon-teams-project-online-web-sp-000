@@ -26,4 +26,11 @@ else
 end 
 
     end 
+
+    def delete 
+        @pokemon = Pokemon.find(params[:id])
+        render json: @pokemon
+        @pokemon.destroy
+    end 
+
 end 
