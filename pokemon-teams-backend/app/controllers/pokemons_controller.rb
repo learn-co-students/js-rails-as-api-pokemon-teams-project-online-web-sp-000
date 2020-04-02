@@ -27,10 +27,10 @@ end
 
     end 
 
-    def delete 
+    def destroy 
         @pokemon = Pokemon.find(params[:id])
-        render json: @pokemon
         @pokemon.destroy
+        render json: @pokemon
     end 
 
 end 
