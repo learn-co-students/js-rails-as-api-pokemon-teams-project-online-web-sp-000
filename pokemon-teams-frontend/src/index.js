@@ -9,6 +9,7 @@ const pretendTrainer = {id: 3, name: 'Steven', pokemons:[pretendPokemon]}
 function makeTrainerCard(trainer){
   let div = document.createElement('div')
   div.className = 'card'
+  div.id = trainer.attributes.id
   div['data-id'] = trainer.attributes.id
   let p = document.createElement('p')
   p.innerText = trainer.attributes.name
@@ -82,7 +83,9 @@ function addPokemon(button, trainer){
         return response.json();
       })
       .then(function(object){
-        console.log(object);
+        let trainer = object.data.relationships.trainer.data
+        let ul = document.getElementById(trainer.id).getElementsByTagName('ul')[0]
+        ul.appendChild(makePokemonLi(object.data.attributes))
       })
       .catch(function(error){
         console.log(error.message);

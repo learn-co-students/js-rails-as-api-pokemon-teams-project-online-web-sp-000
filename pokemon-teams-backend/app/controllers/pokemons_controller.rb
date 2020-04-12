@@ -5,9 +5,10 @@ class PokemonsController < ApplicationController
   end
 
   def create
-    pokemon = Trainer.find(params[trainer_id]).pokemons.build
-    pokemon.name = Faker::Name
-    pokemon.species = Faker::Games::Pokemon
+    pokemon = Trainer.find(params['trainer_id']).pokemons.build
+    pokemon.nickname = Faker::Name.first_name
+    pokemon.species = Faker::Games::Pokemon.name
     pokemon.save
     render json: PokemonSerializer.new(pokemon)
+  end
 end
