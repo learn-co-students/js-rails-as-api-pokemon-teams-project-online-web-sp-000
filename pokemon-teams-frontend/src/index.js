@@ -17,7 +17,7 @@ function makeTrainerCard(trainer){
   button.innerText = 'Add Pokemon'
   div.appendChild(button)
   let ul = document.createElement('ul')
-  for(const pokemon of trainer.pokemons){
+  for(const pokemon of trainer.relationships.pokemons){
     ul.appendChild(makePokemonLi(pokemon))
   }
   div.appendChild(ul)
@@ -42,6 +42,9 @@ function getTrainers(){
   })
   .then(function(json){
     console.log(json)
+  })
+  .catch(function(error){
+    console.log(error)
   })
 }
 
