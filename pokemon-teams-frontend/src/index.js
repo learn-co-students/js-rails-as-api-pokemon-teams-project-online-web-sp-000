@@ -39,6 +39,7 @@ function makePokemonLi(pokemon){
   releaseButton.innerText = 'Release'
   li.appendChild(releaseButton)
   li['data-pokemon-id'] = pokemon.id
+  deltePokemon(releaseButton, li, pokemon)
   return li
 }
 
@@ -64,7 +65,6 @@ function displayTrainers(trainers){
 
 function addPokemon(button, trainer){
   button.addEventListener('click', function(event) {
-    console.log(`${trainer.id} Clicked`)
     let formData = {
       trainer_id: `${trainer.id}`
     }
@@ -83,7 +83,6 @@ function addPokemon(button, trainer){
         return response.json();
       })
       .then(function(object){
-        let trainer = object.data.relationships.trainer.data
         let ul = document.getElementById(trainer.id).getElementsByTagName('ul')[0]
         ul.appendChild(makePokemonLi(object.data.attributes))
       })
@@ -93,10 +92,34 @@ function addPokemon(button, trainer){
   });
 }
 
+function deltePokemon(button, li, pokemon){
+  button.addEventListener('click', function(event){
+    let formData = {
+      id: pokemon.id,
+      nickname: pokemon.nickname,
+      species: pokemon.species,
+      trainer_id: pokemon.trainer_id
+    }
+
+    let configObj = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(formData)
+    };
+
+    fetch(`${POKEMONS_URL}/${pokemon.id}`, configObj)
+      .then(function(response){
+        li.parentElement.removeChild(li)
+      })
+      .catch(function(error){
+        console.log(error.message);
+      })
+  })
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // ul = document.createElement('ul')
-  // ul.appendChild(makePokemonLi(pretendPokemon))
-  // document.querySelector('main').appendChild(ul)
-  // document.querySelector('main').appendChild(makeTrainerCard(pretendTrainer))
   getTrainers()
 })
