@@ -3,8 +3,9 @@ const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 const pretendPokemon = {id: 2, nickname:'Bob', species:'Squirtal'}
+const pretendTrainer = {id: 3, name: 'Steven', pokemons:[pretendPokemon]}
 
-function makeTrainerCard(trainer{
+function makeTrainerCard(trainer){
   let div = document.createElement('div')
   div.className = 'card'
   div['div-id'] = trainer.id
@@ -19,7 +20,7 @@ function makeTrainerCard(trainer{
   for(const pokemon of trainer.pokemons){
     ul.appendChild(makePokemonLi(pokemon))
   }
-  div.appendChild(ud)
+  div.appendChild(ul)
   return div
 }
 
@@ -34,8 +35,20 @@ function makePokemonLi(pokemon){
   return li
 }
 
+function getTrainers(){
+  fetch(TRAINERS_URL)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(json){
+    console.log(json)
+  })
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  ul = document.createElement('ul')
-  ul.appendChild(makePokemonLi(pretendPokemon))
-  document.querySelector('main').appendChild(ul)
+  // ul = document.createElement('ul')
+  // ul.appendChild(makePokemonLi(pretendPokemon))
+  // document.querySelector('main').appendChild(ul)
+  // document.querySelector('main').appendChild(makeTrainerCard(pretendTrainer))
+  getTrainers()
 })
