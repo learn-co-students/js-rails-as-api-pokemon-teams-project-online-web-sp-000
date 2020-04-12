@@ -5,19 +5,20 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 const pretendPokemon = {id: 2, nickname:'Bob', species:'Squirtal'}
 const pretendTrainer = {id: 3, name: 'Steven', pokemons:[pretendPokemon]}
 
+
 function makeTrainerCard(trainer){
   let div = document.createElement('div')
   div.className = 'card'
-  div['div-id'] = trainer.id
+  div['div-id'] = trainer.attributes.id
   let p = document.createElement('p')
-  p.innerText = trainer.name
+  p.innerText = trainer.attributes.name
   div.appendChild(p)
   let button = document.createElement('button')
-  button['data-trainer-id'] = trainer.id
+  button['data-trainer-id'] = trainer.attributes.id
   button.innerText = 'Add Pokemon'
   div.appendChild(button)
   let ul = document.createElement('ul')
-  for(const pokemon of trainer.relationships.pokemons){
+  for(const pokemon of trainer.attributes.pokemons){
     ul.appendChild(makePokemonLi(pokemon))
   }
   div.appendChild(ul)
@@ -41,11 +42,18 @@ function getTrainers(){
     return response.json();
   })
   .then(function(json){
-    console.log(json)
+    displayTrainers(json.data)
   })
   .catch(function(error){
     console.log(error)
   })
+}
+
+function displayTrainers(trainers){
+  main = document.querySelector('main')
+  for(const trainer of trainers){
+    main.appendChild(makeTrainerCard(trainer))
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
