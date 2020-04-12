@@ -9,7 +9,7 @@ const pretendTrainer = {id: 3, name: 'Steven', pokemons:[pretendPokemon]}
 function makeTrainerCard(trainer){
   let div = document.createElement('div')
   div.className = 'card'
-  div['div-id'] = trainer.attributes.id
+  div['data-id'] = trainer.attributes.id
   let p = document.createElement('p')
   p.innerText = trainer.attributes.name
   div.appendChild(p)
@@ -18,11 +18,15 @@ function makeTrainerCard(trainer){
   button.innerText = 'Add Pokemon'
   div.appendChild(button)
   let ul = document.createElement('ul')
+  createTrainerPokemon(trainer, ul)
+  div.appendChild(ul)
+  return div
+}
+
+function createTrainerPokemon(trainer, ul){
   for(const pokemon of trainer.attributes.pokemons){
     ul.appendChild(makePokemonLi(pokemon))
   }
-  div.appendChild(ul)
-  return div
 }
 
 function makePokemonLi(pokemon){
@@ -54,6 +58,35 @@ function displayTrainers(trainers){
   for(const trainer of trainers){
     main.appendChild(makeTrainerCard(trainer))
   }
+}
+
+function addPokemon(button, trainer){
+  button.addEventListener('click', function(event) {
+    let formData = {
+      trainer_id: `${trainer.id}`
+    }
+
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(formData)
+    };
+
+    url = `${POKEMONS_URL}/${li['data-pokemon-id']}`
+    fetch(url, configObj)
+      .then(function(response) {
+        return response.json();
+      });
+      .then(function(object) {
+        console.log(object);
+      });
+    .catch(function(error) {
+        console.log(error.message);
+      });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
