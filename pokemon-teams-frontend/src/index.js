@@ -17,6 +17,7 @@ function makeTrainerCard(trainer){
   button['data-trainer-id'] = trainer.attributes.id
   button.innerText = 'Add Pokemon'
   div.appendChild(button)
+  addPokemon(button, trainer)
   let ul = document.createElement('ul')
   createTrainerPokemon(trainer, ul)
   div.appendChild(ul)
@@ -62,6 +63,7 @@ function displayTrainers(trainers){
 
 function addPokemon(button, trainer){
   button.addEventListener('click', function(event) {
+    console.log(`${trainer.id} Clicked`)
     let formData = {
       trainer_id: `${trainer.id}`
     }
@@ -75,17 +77,16 @@ function addPokemon(button, trainer){
       body: JSON.stringify(formData)
     };
 
-    url = `${POKEMONS_URL}/${li['data-pokemon-id']}`
-    fetch(url, configObj)
-      .then(function(response) {
+    fetch(POKEMONS_URL, configObj)
+      .then(function(response){
         return response.json();
-      });
-      .then(function(object) {
+      })
+      .then(function(object){
         console.log(object);
-      });
-    .catch(function(error) {
+      })
+      .catch(function(error){
         console.log(error.message);
-      });
+      })
   });
 }
 
