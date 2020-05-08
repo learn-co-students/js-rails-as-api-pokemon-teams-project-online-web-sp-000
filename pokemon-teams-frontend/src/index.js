@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function createInitialTeams() {
-  return fetch("http://localhost:3000/trainers")
+  return fetch(TRAINERS_URL)
   .then(function(response) {
     return response.json();
   })
@@ -18,13 +18,12 @@ function createInitialTeams() {
     //console.log(arrayOfTrainerObjects[0]); //! returns trainer object
     for (const trainer of arrayOfTrainerObjects) {
       // console.log(trainer) => {id: "5", type: "trainer", attributes: {…}}
-      insertTrainerIntoDOM(trainer);
+      renderTrainer(trainer);
     }
   });
 };
 
-function insertTrainerIntoDOM(trainerObj) {
-
+function renderTrainer(trainerObj) {
   let trainerDiv = document.createElement('div');
   trainerDiv.className = 'card';
   trainerDiv.setAttribute('data-id', trainerObj.id);
@@ -38,7 +37,7 @@ function insertTrainerIntoDOM(trainerObj) {
   addPokemonBtn.innerText = 'Add Pokemon';
   addPokemonBtn.setAttribute('data-trainer-id', trainerObj.id);
   trainerDiv.appendChild(addPokemonBtn);
-  addPokemonBtn.addEventListener('click', createAdditionToTeam);
+  addPokemonBtn.addEventListener('click', createPokemon);
 
   let teamUl = document.createElement('ul');
   trainerDiv.appendChild(teamUl);
@@ -52,44 +51,56 @@ function insertTrainerIntoDOM(trainerObj) {
       releaseButn.innerText = 'Release';
       pokemonLi.innerText = `${pokemon.nickname} (${pokemon.species})`;
       pokemonLi.appendChild(releaseButn);
+      releaseButn.addEventListener('click', deletePokemon); 
       trainerDiv.appendChild(pokemonLi);
     }
 };
 
-function createAdditionToTeam() {
-  //prevent button defaults
-  event.preventDefault();
-  //check if there are less than 6 pokemon on team, if so, create one
-  let cardElement = event.target.parentElement;
-  if (cardElement.getElementsByTagName('li').length < 6) {
-    //create new pokemon
-    createPokemon(event);
-  } else {
-    console.log('Already 6 on this team');
-  } 
-  //add new pokemon to DOM
-
-  //add new pokemon to db
+function renderPokemon(pokemon) {
+  console.log(pokemon);
 }
 
 function createPokemon(event) {
+  //prevent button defaults
+  event.preventDefault();
   let trainerId = event.target.getAttribute('data-trainer-id');
-  let dataObj = {"id": `${trainerId}`};
-  
-  let configObj = {
-    method: "post",
+  //let cardElement = event.target.parentElement;
+
+  const configObj = {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify(dataObj)
-  };
-  
-  fetch('http://localhost:3000/pokemons', configObj)
-  .then(function(response) {
-    return response.json();
+    body: JSON.stringify({"trainer_id": trainerId})
+  }
+  fetch(POKEMONS_URL, configObj)
+  .then(resp => resp.json())
+  .then(json => {
+    if (json.message) {
+      alert(json.message);
+    } else {
+      renderPokemon(json);
+    };
   })
-  .then(function(object) {
-    console.log(object);
-  });
 }
+
+function renderPokemon(pokemon) {
+  const ul = document.querySelector('div[data-id="${pokemon.trainer_id}"]')
+  console.log(ul);
+}
+
+
+function deletePokemon(event) {
+  event.preventDefault();
+  let id = event.target.getAttribute('data-pokemon-id');
+  const configObj = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+   }
+   fetch(`${POKEMONS_URL}/${id}`, configObj)
+   event.target.parentElement.remove();
+};

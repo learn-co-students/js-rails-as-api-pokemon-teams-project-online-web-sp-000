@@ -13,19 +13,21 @@ class PokemonsController < ApplicationController
   end
 
   def create 
-    binding.pry
-  # trainer_collection.each do |trainer|
-  #   team_size = (SecureRandom.random_number(6) + 1).floor
-    
-  #   (1..team_size).each do |poke|
-  #     name = Faker::Name.first_name
-  #     species = Faker::Games::Pokemon.name
-  #     Pokemon.create(nickname: name, species: species, trainer_id: trainer.id)
-  #   end
+    trainer = Trainer.find(params[:trainer_id])
+    pokemon = trainer.pokemons.build({
+      nickname: Faker::Name.first_name,
+      species: Faker::Games::Pokemon.name
+    })
+    if pokemon.save 
+      render json: PokemonSerializer.new(pokemon, options)
+    else
+      render json: pokemon.errors.messages[:team_max][0]
+    end
   end
 
   def destroy 
-    binding.pry
+    pokemon = Pokemon.find(params[:id])
+    pokemon.destroy
   end
 
 end
