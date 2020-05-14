@@ -12,8 +12,8 @@ function getTrainers() {
 //   credentials: "same-origin",
   // mode: "no-cors",
 //   mode: "cors",
-//   mode: "same-origin",
-}).then(function(response) {response.json()
+  mode: "same-origin",
+}).then(function(response) {
 //   response.status     //=> number 100–599
 //   response.statusText //=> String
 //   response.headers    //=> Headers

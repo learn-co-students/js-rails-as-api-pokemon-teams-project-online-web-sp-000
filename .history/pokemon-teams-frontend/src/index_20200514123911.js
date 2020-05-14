@@ -18,7 +18,7 @@ function getTrainers() {
 //   response.statusText //=> String
 //   response.headers    //=> Headers
 //   response.url        //=> String
-  console.log(response)
+  console.log(response.json())
 //   return response.text()
 }, function(error) {
   error.message //=> String

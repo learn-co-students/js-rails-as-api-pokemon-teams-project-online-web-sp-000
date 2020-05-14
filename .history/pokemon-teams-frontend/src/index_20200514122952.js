@@ -10,10 +10,10 @@ function getTrainers() {
     "Content-Type": "application/json"
   },
 //   credentials: "same-origin",
-  // mode: "no-cors",
+  mode: "no-cors",
 //   mode: "cors",
 //   mode: "same-origin",
-}).then(function(response) {response.json()
+}).then(function(response) {
 //   response.status     //=> number 100–599
 //   response.statusText //=> String
 //   response.headers    //=> Headers
