@@ -6,23 +6,17 @@ function getTrainers() {
   return fetch(TRAINERS_URL)
     .then(response => response.json())
       // .then(trainer => console.log(trainer))
-}
-
-getTrainers().then(trainers => {
+.then(trainers => {
   trainers.forEach(trainer => {
+    console.log(trainer)
     //function to render toys goes here or something
     // renderTrainers(trainer)
   })
 })
 
-
-document.addEventListener("DOMContentLoaded", function(e) {
-  e.preventDefault();
-  console.log("event listener is working on line 21");
-  getTrainers()
-  // window.stop()
-}
- )
+    }
+document.addEventListener(dom)
+// getTrainers()
 
 function renderTrainers(trainer){
   // console.log("renderTrainers is console.logging")

@@ -31,7 +31,7 @@ div.card {
   padding: 10px;
   border-radius: 10px;
 }
-div.box {
+div#card {
   background-color: #eeeeee;
   height: 250px;
   width: 300px;
@@ -41,11 +41,6 @@ div.box {
 }
 
 p {
-  font-size: 1.5em;
-  color: black;
-  font-family: Helvetica;
-}
-.name-label {
   font-size: 1.5em;
   color: black;
   font-family: Helvetica;

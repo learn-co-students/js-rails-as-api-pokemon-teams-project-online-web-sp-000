@@ -15,10 +15,9 @@ getTrainers().then(trainers => {
   })
 })
 
-
 document.addEventListener("DOMContentLoaded", function(e) {
   e.preventDefault();
-  console.log("event listener is working on line 21");
+  console.log("event listener is working on line 20");
   getTrainers()
   // window.stop()
 }

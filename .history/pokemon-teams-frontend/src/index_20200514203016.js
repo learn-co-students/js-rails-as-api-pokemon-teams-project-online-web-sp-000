@@ -11,18 +11,9 @@ function getTrainers() {
 getTrainers().then(trainers => {
   trainers.forEach(trainer => {
     //function to render toys goes here or something
-    // renderTrainers(trainer)
+    renderTrainers(trainer)
   })
 })
-
-
-document.addEventListener("DOMContentLoaded", function(e) {
-  e.preventDefault();
-  console.log("event listener is working on line 21");
-  getTrainers()
-  // window.stop()
-}
- )
 
 function renderTrainers(trainer){
   // console.log("renderTrainers is console.logging")
@@ -47,12 +38,15 @@ function renderTrainers(trainer){
   pokeCrew.forEach(character => {
     //function to render toys goes here or something
     var item = document.createElement("li")
-    item.innerText = `${character.nickname} \(${character.species}\)`
-    item.appendChild(releasePokemon) 
-    pokeList.appendChild(item)
+    item.innerText = `${character.nickName} ${character.species}`
+    item.appendChild(releasePokemon)
+    
   })
 
-  
+ 
+
+
+  pokeList.appendChild(item)
   // pokeList.append(releasePokemon)
   box.appendChild(trainerName)
   box.appendChild(addPokemon)

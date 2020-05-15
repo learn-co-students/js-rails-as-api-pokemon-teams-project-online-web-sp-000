@@ -11,14 +11,14 @@ function getTrainers() {
 getTrainers().then(trainers => {
   trainers.forEach(trainer => {
     //function to render toys goes here or something
-    // renderTrainers(trainer)
+    renderTrainers(trainer)
   })
 })
 
 
 document.addEventListener("DOMContentLoaded", function(e) {
   e.preventDefault();
-  console.log("event listener is working on line 21");
+  console.log("event listener is working on line 20");
   getTrainers()
   // window.stop()
 }
