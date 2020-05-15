@@ -33,9 +33,9 @@ function renderTrainers(trainer){
 
   var addPokemon = document.createElement("button")
   addPokemon.innerHTML = "Add Pokemon"
-
-
-
+  
+  
+  
   var pokeList =  document.createElement("ul")
   var pokeCrew = trainer.pokemons
 
@@ -43,13 +43,13 @@ function renderTrainers(trainer){
     var item = document.createElement("li")
     item.innerText = `${character.nickname} \(${character.species}\)`
     var releasePokemon =  document.createElement("button")
-    releasePokemon.innerHTML = "RELEASE"
-  releasePokemon.setAttribute("class", "release")
-    item.appendChild(releasePokemon)
+    releasePokemon.innerHTML = "RELEASE"  
+  releasePokemon.setAttribute("class", "release") 
+    item.appendChild(releasePokemon) 
     pokeList.appendChild(item)
   })
 
-
+  
   // pokeList.append(releasePokemon)
   box.appendChild(trainerName)
   box.appendChild(addPokemon)
