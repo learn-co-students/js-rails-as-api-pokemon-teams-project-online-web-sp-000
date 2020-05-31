@@ -71,6 +71,7 @@ function addPokemonToTrainer(trainerId) {
   })
   .catch(function(error) {
     console.log(error);
+    console.log('Cannot have more than 6 pokemon on one team.')
   });
 }
 
@@ -99,7 +100,7 @@ function putNewPokemonOnPage(json) {
   releaseBtn.setAttribute('data-pokemon-id', json.id);
   releaseBtn.addEventListener('click', () => {
     newLi.remove();
-    // removePokemon();
+    removePokemon();
   })
 
   newLi.appendChild(releaseBtn);
