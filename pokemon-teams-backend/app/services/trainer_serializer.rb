@@ -4,10 +4,13 @@ class TrainerSerializer
     end
 
     def to_serialized_json
-        options: {
+        options = {
             include: {
-                :pokemon
-            }
+                pokemons: {
+                    except: [:created_at, :updated_at]
+                }
+            },
+            except: [:created_at, :updated_at]
         }
         @trainer.to_json(options)
     end
