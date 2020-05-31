@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let addPokemonBtn = document.createElement('button');
       addPokemonBtn.innerText = "Add Pokemon";
       addPokemonBtn.addEventListener('click', () => {
-        addPokemonToTrainer(element.id);
+        addPokemonToTrainer(element.id.toString());
       });
       thisDiv.appendChild(addPokemonBtn);
 
@@ -50,14 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function addPokemonToTrainer(trainerId) {
+  const formData = {
+    trainer_id: trainerId
+  };
+
   const configObj = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: {
-      'trainer_id': trainerId
-    }
+    body: JSON.stringify(formData)
   };
 
   fetch(POKEMONS_URL, configObj)
