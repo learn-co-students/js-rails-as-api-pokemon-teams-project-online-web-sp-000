@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         releaseBtn.setAttribute('data-pokemon-id', pokemon.id);
         releaseBtn.addEventListener('click', () => {
           newLi.remove();
-          // removePokemon();
+          removePokemon(pokemon.id);
         })
 
         newLi.appendChild(releaseBtn);
@@ -68,7 +68,6 @@ function addPokemonToTrainer(trainerId) {
   })
   .then(function(json) {
     putNewPokemonOnPage(json);
-    console.log(json);
   })
   .catch(function(error) {
     console.log(error);
@@ -107,6 +106,13 @@ function putNewPokemonOnPage(json) {
   pokemonList.appendChild(newLi);
 }
 
-// function removePokemon(pokemonId) {
-//   fetch()
-// }
+function removePokemon(pokemonId) {
+  const configObj = {
+    method: 'DELETE'
+  }
+
+  fetch(`${POKEMONS_URL}/${pokemonId}`, configObj)
+  .then(function(response) {
+    console.log(response)
+  })
+}
