@@ -67,8 +67,44 @@ function addPokemonToTrainer(trainerId) {
     return response.json();
   })
   .then(function(json) {
+    putNewPokemonOnPage(json);
     console.log(json);
   })
+  .catch(function(error) {
+    console.log(error);
+  });
+}
+
+function putNewPokemonOnPage(json) {
+  let trainers = document.getElementsByClassName('card');
+  let trainer;
+  for(let element of trainers) {
+    if(element.getAttribute('data-id') == json.trainer_id) {
+      trainer = element;
+    }
+  }
+
+  let pokemonList;
+
+  for(const element of trainer.children) {
+    if(element.tagName.toLowerCase() == 'ul') {
+      pokemonList = element;
+    }
+  }
+
+  let newLi = document.createElement('li');
+  newLi.innerText = `${json.nickname} (${json.species})`;
+  let releaseBtn = document.createElement('button');
+  releaseBtn.innerText = "Release";
+  releaseBtn.className = "release";
+  releaseBtn.setAttribute('data-pokemon-id', json.id);
+  releaseBtn.addEventListener('click', () => {
+    newLi.remove();
+    // removePokemon();
+  })
+
+  newLi.appendChild(releaseBtn);
+  pokemonList.appendChild(newLi);
 }
 
 // function removePokemon(pokemonId) {
