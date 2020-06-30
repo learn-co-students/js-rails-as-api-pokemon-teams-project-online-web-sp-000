@@ -3,4 +3,9 @@ class TrainersController < ApplicationController
     trainers = Trainer.all
     render json: trainers, include: [:pokemons]
   end
+
+  def show
+    trainer = Trainer.find_by(id: params[:id])
+    render json: trainer, include: [:pokemons]
+  end
 end
