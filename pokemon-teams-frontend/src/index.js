@@ -1,10 +1,11 @@
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
+const main = document.querySelector("main")
 
-document.addEventListener("DOMContentLoaded", () => {
-    allTrainers()
-})
+//document.addEventListener("DOMContentLoaded")
+
+document.addEventListener("DOMContentLoaded", allTrainers)
 
 function allTrainers() {
     fetch(TRAINERS_URL)
@@ -17,23 +18,22 @@ function allTrainers() {
 }
 
 function addTrainers(trainer) {
-    const main = document.querySelector("main")
-    const div = document.createElement("div")
+    const div = document.createElement("div") // Define all of our elements that we will use to assemble our trainer's teams
     const p = document.createElement("p")
     const addButton = document.createElement("button")
     const ul = document.createElement("ul")
 
-    div.classList.add("card")
+    div.setAttribute("class", "card") // Assign attributes (classes and ids) to the different elements
     div.setAttribute("data-id", trainer.id)
     addButton.setAttribute("data-trainer-id", trainer.id)
     addButton.innerHTML = "Add Pokemon"
     ul.id = trainer.id
-    main.append(div)
-
     p.innerHTML = trainer.name
-    div.append(p)
-    p.appendChild(addButton)
-    p.appendChild(ul)
+
+    div.appendChild(p) // We incorporate all these elements into our div, which essentially puts them in a nice container
+    div.appendChild(addButton)
+    div.appendChild(ul)
+    main.append(div)
 
     addButton.addEventListener("click", event => {
         addPokemon(trainer, event)
@@ -48,12 +48,12 @@ function addTrainers(trainer) {
         releaseButton.classList.add("release")
         releaseButton.setAttribute("data-pokemon-id", pokemon.id)
         releaseButton.innerHTML = "Release"
+        li.appendChild(releaseButton)
 
         releaseButton.addEventListener("click", event => {
             releasePokemon(pokemon, event)
         })
 
-        li.appendChild(releaseButton)
     }) 
 }
 
@@ -92,7 +92,11 @@ function releasePokemon(pokemon, event) {
     event.preventDefault()
 
     fetch(`${POKEMONS_URL}/${pokemon.id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
     })
     .then(resp => resp.json())
     .then(data => {
