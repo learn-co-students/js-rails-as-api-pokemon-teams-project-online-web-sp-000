@@ -1,0 +1,3 @@
+[submodule "pokemon-teams-backend"]
+	path = pokemon-teams-backend
+	url = https://github.com/Andrew-J-Williams/js-rails-as-api-pokemon-teams-project-online-web-sp-000.git
