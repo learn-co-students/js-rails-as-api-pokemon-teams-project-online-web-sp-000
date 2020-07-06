@@ -36,11 +36,11 @@ not work. Rather, your task is to build towards the goals below by constructing
 both a Rails API and JavaScript frontend together. The specific implementation
 for achieving these goals is left to you.
 
-- When a user loads the page, they should see all trainers, with their current
+- [ ] When a user loads the page, they should see all trainers, with their current
   team of Pokemon.
-- Whenever a user hits "Add Pokemon" and they have space on their team, they
+- [ ] Whenever a user hits "Add Pokemon" and they have space on their team, they
   should get a new Pokemon.
-- Whenever a user hits "Release Pokemon" on a specific Pokemon team, that
+- [ ] Whenever a user hits "Release Pokemon" on a specific Pokemon team, that
   specific Pokemon should be released from the team.
 
 ## Backend
@@ -60,7 +60,7 @@ build, add the following gem to the Gemfile:
 gem 'faker'
 ```
 
-While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run 
+While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run
 `bundle install`. If you recall, `rack-cors` is necessary for cross-origin
 resource sharing. To get rack-cors working, once the gem is installed, uncomment
 the following code in `config/initializers/cors.rb`:
@@ -157,9 +157,10 @@ If for any reason you had to quit the running server and have to restart it, you
 
 Run `lsof -i :3000` to inspect what's running on port 3000 (alternatively, you can try `ps aux | grep 3000`).
 You will see something like the following:
+
 ```
-COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
-ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN) 
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN)
 ruby 9639 matteo 29u IPv6 0x89939dfa2ef1897 0t0 TCP localhost:hbci (LISTEN)
 ```
 
