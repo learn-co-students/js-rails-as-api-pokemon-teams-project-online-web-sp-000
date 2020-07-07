@@ -65,6 +65,39 @@ div.setAttribute("data-id", trainer_obj.id)
 
    }
 
+   const createPokemon = (e) => {
+     // we place a debugger in order to analyze (e), the event handler for
+     // the call back function
+     // debugger
+
+     e.preventDefault()
+     const configObj = {
+       method:"POST",
+       headers: {
+         "Content-Type": "application/json",
+         "Accept": "application/json"
+       },
+
+       body: JSON.stringify(
+         {trainer_id: e.target.dataset.trainerId }
+         // event object is returned with corresponding info to display specified trainer_id
+       )
+     }
+
+     fetch(POKEMONS_URL, configObj)
+     .then(res => res.json())
+     .then(json => { console.log(" Worlds greatest")
+
+     })
+   }
+
+   const releasePokemon = (e) => {
+     e.preventDefault()
+     debugger
+
+   }
+
+
    const renderPokemon = (pokemon) => {
 
      const ul = document.querySelector(`div[data-id = "${pokemon.trainer_id}"]`)
@@ -76,20 +109,14 @@ div.setAttribute("data-id", trainer_obj.id)
         button.setAttribute("data-pokemon-id", pokemon.id)
         button.innerHTML = "release"
         button.addEventListener("click", releasePokemon)
-
+        // callback function is the event function that is called  when the event takes place
 
         li.appendChild(button)
         ul.appendChild(li)
 
-        const createPokemon = () => {
-
-        }
 
 
-        const deletePokemon = () => {
 
-
-        }
 
 
 }
