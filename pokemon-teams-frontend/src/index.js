@@ -146,7 +146,12 @@ div.setAttribute("data-id", trainer_obj.id)
      // 2. we perform an action at this address
 //      #=> Example Request
 // DELETE /pokemons/:pokemon_id
-
+//  e.target.parentElement.remove() EXPLAINED
+//   ->>> 1. we access the button release,
+//  ->>> 2. then we find the parentElement which we desire
+//  we want to remove the parent element because the entire pokemon is renderd in the parentElement.
+//  ->> 3. we then apply remove() ,
+// ->> we invoke the remove function to remove the parent element 
 
 
 
