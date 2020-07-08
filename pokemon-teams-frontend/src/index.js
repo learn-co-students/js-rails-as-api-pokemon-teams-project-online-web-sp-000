@@ -1,6 +1,9 @@
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
+// ie localhost3000/pokemon
+//  url we are making request to
+// url is like house address we are going to
 const main = document.querySelector("main")
 
 
@@ -72,24 +75,38 @@ div.setAttribute("data-id", trainer_obj.id)
 
      e.preventDefault()
      const configObj = {
+       // action we take once we get to the house.
        method:"POST",
        headers: {
          "Content-Type": "application/json",
          "Accept": "application/json"
        },
+       // what type of request we are sending.
+       // i.e request from browser to backend
 
        body: JSON.stringify(
          {trainer_id: e.target.dataset.trainerId }
          // event object is returned with corresponding info to display specified trainer_id
+         // body -> sending the actual data to backend
+         // e =
+         // event object
+         // e.target gives us the properties we use
+         // e.target.dataset = gives us the DOM string that we need for the trainerId, in order to create/ and or  add a  pokemon/
        )
      }
 
      fetch(POKEMONS_URL, configObj)
+     // 1. url address that we are going to (POKEMONS_URL)
+     // 2. the action we take once we get to that address(configObj)
      .then(res => res.json())
+     // convert the response to json
      .then(json => {
-       if (json.messages){
+       if (json.message){
+         // when json gets to message we display the alert message (pokemon_controller)
+         // debugger
           alert(json.message)
         } else {
+          // if we do not reach that point then render the pokemon on the page.
           renderPokemon(json)
         }
 
@@ -99,6 +116,40 @@ div.setAttribute("data-id", trainer_obj.id)
    const releasePokemon = (e) => {
      e.preventDefault()
      // debugger
+     const configObj = {
+       // action we take once we get to the house.
+       method:"DELETE",
+       headers: {
+         "Content-Type": "application/json",
+         "Accept": "application/json"
+       },
+       // what type of request we are sending.
+       // i.e request from browser to backend
+
+       // body: JSON.stringify(
+       //   {trainer_id: e.target.dataset.trainerId }
+       // -- because we are destroying an object we do not need a body ------
+         // event object is returned with corresponding info to display specified trainer_id
+         // body -> sending the actual data to backend
+         //
+
+     }
+
+     fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`,configObj)
+     e.target.parentElement.remove()
+     // we are making the url dynamic so that we can access any of the pokemonId
+     // e.target = onclick button
+     // (e)----> records and hold the activity on the button
+     // e.target.dataset = "data - pokemon - id"
+     //  e.target.dataset.pokemonId gives us the pokemonId
+     // 1. we access the address
+     // 2. we perform an action at this address
+//      #=> Example Request
+// DELETE /pokemons/:pokemon_id
+
+
+
+
 
    }
 
