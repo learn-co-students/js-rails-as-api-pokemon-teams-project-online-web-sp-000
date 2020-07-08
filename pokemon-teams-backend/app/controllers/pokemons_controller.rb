@@ -19,10 +19,8 @@ class PokemonsController < ApplicationController
 
       })
 
-      if pokemon.save
-        render json :pokemon
-      else
-        binding.pry
+      render json: (pokemon.save) ? pokemon : {message: pokemon.errors.messages[:team_max][0]}
+
 
   end
 

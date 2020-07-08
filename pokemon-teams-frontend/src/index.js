@@ -86,14 +86,19 @@ div.setAttribute("data-id", trainer_obj.id)
 
      fetch(POKEMONS_URL, configObj)
      .then(res => res.json())
-     .then(json => { console.log(" Worlds greatest")
+     .then(json => {
+       if (json.messages){
+          alert(json.message)
+        } else {
+          renderPokemon(json)
+        }
 
      })
    }
 
    const releasePokemon = (e) => {
      e.preventDefault()
-     debugger
+     // debugger
 
    }
 

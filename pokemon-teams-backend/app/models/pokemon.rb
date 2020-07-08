@@ -1,6 +1,6 @@
 class Pokemon < ApplicationRecord
   belongs_to :trainer
-  validate:pokemon_count_valid
+  validate:pokemon_count_valid?
 
 
 
