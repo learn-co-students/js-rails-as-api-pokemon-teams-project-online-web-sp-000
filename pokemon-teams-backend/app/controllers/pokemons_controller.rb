@@ -25,5 +25,10 @@ class PokemonsController < ApplicationController
         end
     end
 
+    def destroy 
+        pokemon = Pokemon.find_by(id: params[:id])
+        pokemon.delete
+        render json: PokemonSerializer.new(pokemon)
+    end
 
 end
