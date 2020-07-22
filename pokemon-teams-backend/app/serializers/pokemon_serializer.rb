@@ -1,4 +1,5 @@
 class PokemonSerializer
     include FastJsonapi::ObjectSerializer 
-    attributes :species, :nickname, :trainer_id
+    attributes :species, :nickname
+    belongs_to :trainer
 end
