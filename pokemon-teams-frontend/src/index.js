@@ -15,6 +15,6 @@ const loadTrainers = () => {
 }
 
 const renderTrainer = (trainerHash) => {
-
+    
 
 }
