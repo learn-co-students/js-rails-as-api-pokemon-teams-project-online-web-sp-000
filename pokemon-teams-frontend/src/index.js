@@ -9,7 +9,12 @@ const loadTrainers = () => {
     const TRAINERS_URL = `${BASE_URL}/trainers`
     fetch(TRAINERS_URL)
     .then(resp => resp.json())
-    .then(json => console.log("Yuppie!"))
-    
+    .then(json => {
+        json.forEach(trainer => renderTrainer(trainer))
+    })
+}
+
+const renderTrainer = (trainerHash) => {
+
 
 }
