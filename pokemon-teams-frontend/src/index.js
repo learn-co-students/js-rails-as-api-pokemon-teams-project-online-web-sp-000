@@ -22,11 +22,12 @@ const renderTrainer = (trainerHash) => {
     
     div.setAttribute("class", "card")
     div.setAttribute("data-id", trainerHash.id)
+    //dataset.id
     p.innerHTML = trainerHash.name
     button.setAttribute("data-trainer-id", trainerHash.id)
     button.innerHTML = "Add Pokemon"
     // attach even listener to button (click)
-    buttong.addEventListener("click", createPokemon)
+    button.addEventListener("click", createPokemon)
 
     div.appendChild(p)
     div.appendChild(button)
@@ -39,7 +40,9 @@ const renderTrainer = (trainerHash) => {
 }
 
 const renderPokemon = (pokemon) => {
-    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+    const ul = document.createElement("ul")
+    const div = document.querySelector(`div[data-id='${pokemon["trainer_id"]}']`)
+    console.log(div)
     const li = document.createElement("li")
     const button = document.createElement("button")
 
@@ -50,15 +53,34 @@ const renderPokemon = (pokemon) => {
     // attach event listener to button (click)
     button.addEventListener("click", deletePokemon)
 
-    li.appendChild(button)
+    div.append(ul)
     ul.appendChild(li)
+    li.appendChild(button)
 
 }
 
-const createPokemon = () => {
-
+const createPokemon = (e) => {
+    e.preventDefault()
+    console.log(e.target.dataset.trainerId)
+    const configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({"trainer_id": e.target.dataset.trainerId})
+    }
+    fetch(POKEMONS_URL, configObj)
+    .then(res => res.json())
+    .then(json => {
+        if (json.message){
+            alert(json.message)
+        } else {
+        renderPokemon(json)
+    }})
 }
 
-const deletePokemon = () => {
+const deletePokemon = (e) => {
+    e.preventDefault()
 
 }
