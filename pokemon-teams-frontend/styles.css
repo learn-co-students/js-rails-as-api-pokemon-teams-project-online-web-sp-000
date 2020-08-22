@@ -56,9 +56,9 @@ body {
     background-color: #E1332D;
   }
   
-  @media only screen and (min-width: 500px) {
+  @media only screen and (min-width: 1000px) {
     main {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
   
