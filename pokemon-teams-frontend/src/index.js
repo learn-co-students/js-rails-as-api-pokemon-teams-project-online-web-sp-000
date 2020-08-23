@@ -53,7 +53,6 @@ function renderPokemon(pokemon) {
 }
 
 function createPokemon(e){
-    e.preventDefault()
     const configurationObj = {
         method: "POST",
         headers: {
@@ -82,7 +81,6 @@ function createPokemon(e){
 }
 
 function releasePokemon(e) {
-    e.preventDefault()
     const configurationObj = {
         method: "DELETE",
         headers: { "Content-Type": "application/json",
