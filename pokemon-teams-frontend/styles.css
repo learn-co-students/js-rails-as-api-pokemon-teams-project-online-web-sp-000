@@ -50,10 +50,18 @@ body {
     background-color: green;
     border-radius: 10px;
   }
+
+  button:hover {
+    background: lightgreen;
+  }
   
   button.release {
     float: right;
     background-color: #E1332D;
+  }
+
+  button.release:hover {
+    background: pink;
   }
   
   @media only screen and (min-width: 500px) {
