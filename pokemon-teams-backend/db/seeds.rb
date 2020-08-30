@@ -31,7 +31,7 @@ trainers_name.each do |name|
 end
 
 trainer_collection.each do |trainer|
-  team_size = (SecureRandom.random_number(6) + 1).floor
+  team_size = (SecureRandom.random_number(5) + 1).floor
 
   (1..team_size).each do |poke|
     name = Faker::Name.first_name

@@ -36,6 +36,29 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log(newTrainer);
                     let pokemonLi = document.createElement("li");
                     pokemonLi.innerHTML = `${obj["nickname"]} (${obj["species"]})<button class="release" data-pokemon-id=${obj["id"]}> Release </button>`;
+                    let releaseButton = pokemonLi.querySelector("button");
+                    releaseButton.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        console.log("release");
+                        let formData = {
+                            pokemonId: event.target.getAttribute("data-pokemon-id")
+                        }
+                        let configObj = {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json"
+                            },
+                            body: JSON.stringify(formData)
+                        }
+                        fetch ("http://localhost:3000/pokemons/:pokemon_id", configObj)
+                        .then(resp => resp.json())
+                        .then(obj => {
+                            console.log(obj);
+                            event.target.parentNode.remove();
+                        });
+                        
+                    })
                     let trainerUl = newTrainer.querySelector("ul");
                     trainerUl.appendChild(pokemonLi);
                 });
@@ -47,6 +70,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 releaseButton.addEventListener("click", function(event) {
                     event.preventDefault();
                     console.log("release");
+                    let formData = {
+                        pokemonId: event.target.getAttribute("data-pokemon-id")
+                    }
+                    let configObj = {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    }
+                    fetch ("http://localhost:3000/pokemons/:pokemon_id", configObj)
+                    .then(resp => resp.json())
+                    .then(obj => {
+                        console.log(obj);
+                        event.target.parentNode.remove();
+                    });
+                    
                 })
                 newTrainer.querySelector("ul").appendChild(li);
             }
