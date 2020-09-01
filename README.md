@@ -60,7 +60,7 @@ build, add the following gem to the Gemfile:
 gem 'faker'
 ```
 
-While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run 
+While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run
 `bundle install`. If you recall, `rack-cors` is necessary for cross-origin
 resource sharing. To get rack-cors working, once the gem is installed, uncomment
 the following code in `config/initializers/cors.rb`:
@@ -78,13 +78,13 @@ end
 ```
 
 > **Aside**: Notice that we've put this in `config/initializers/cors.rb`. We've
-also seen this code being placed in `config/application.rb`. Both will work, but
-Rails provides the `cors.rb` file specifically for defining our rules for
-cross-origin HTTP requests.
+> also seen this code being placed in `config/application.rb`. Both will work, but
+> Rails provides the `cors.rb` file specifically for defining our rules for
+> cross-origin HTTP requests.
 
 The string after `origins` specifies which hosts will be allowed to make
 requests to your API. Your brand-new rails app probably comes with the string
-`"example.com"` there — change it to "*" to allow all hosts. In a production
+`"example.com"` there — change it to "\*" to allow all hosts. In a production
 application, you might want to specify a particular hostname.
 
 If you already have a rails server running, stop and restart it so that your
@@ -157,9 +157,10 @@ If for any reason you had to quit the running server and have to restart it, you
 
 Run `lsof -i :3000` to inspect what's running on port 3000 (alternatively, you can try `ps aux | grep 3000`).
 You will see something like the following:
+
 ```
-COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
-ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN) 
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN)
 ruby 9639 matteo 29u IPv6 0x89939dfa2ef1897 0t0 TCP localhost:hbci (LISTEN)
 ```
 
@@ -178,14 +179,30 @@ As CSS is already provided, you can use this sample HTML as a guide when
 building out your frontend JavaScript:
 
 ```html
-<div class="card" data-id="1"><p>Prince</p>
+<div class="card" data-id="1">
+  <p>Prince</p>
   <button data-trainer-id="1">Add Pokemon</button>
   <ul>
-    <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
-    <li>Zachariah (Ditto) <button class="release" data-pokemon-id="141">Release</button></li>
-    <li>Mittie (Farfetch'd) <button class="release" data-pokemon-id="149">Release</button></li>
-    <li>Rosetta (Eevee) <button class="release" data-pokemon-id="150">Release</button></li>
-    <li>Rod (Beedrill) <button class="release" data-pokemon-id="151">Release</button></li>
+    <li>
+      Jacey (Kakuna)
+      <button class="release" data-pokemon-id="140">Release</button>
+    </li>
+    <li>
+      Zachariah (Ditto)
+      <button class="release" data-pokemon-id="141">Release</button>
+    </li>
+    <li>
+      Mittie (Farfetch'd)
+      <button class="release" data-pokemon-id="149">Release</button>
+    </li>
+    <li>
+      Rosetta (Eevee)
+      <button class="release" data-pokemon-id="150">Release</button>
+    </li>
+    <li>
+      Rod (Beedrill)
+      <button class="release" data-pokemon-id="151">Release</button>
+    </li>
   </ul>
 </div>
 ```
@@ -244,7 +261,7 @@ GET /trainers
 
 ### Adding a Pokemon
 
-* Note: When adding a new pokemon, the nickname should be generated using the
+- Note: When adding a new pokemon, the nickname should be generated using the
   `Faker::Name` gem and the species should be generated using the
   `Faker::Games::Pokemon` gem. See the seeds.rb file above as an example.
 
