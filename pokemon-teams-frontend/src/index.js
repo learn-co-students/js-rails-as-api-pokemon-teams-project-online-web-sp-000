@@ -81,6 +81,9 @@ function addPokemonToList(object) {
     release.classList.add('release');
     release.dataset.pokemonId = object.id;
     release.innerText = "Release";
+    release.addEventListener('click', event => {
+        removePokemon(event.target);
+      });
     li.appendChild(release);
 
     trainer.lastElementChild.appendChild(li) ;
