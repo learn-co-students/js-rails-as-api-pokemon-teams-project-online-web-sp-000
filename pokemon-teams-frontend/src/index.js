@@ -87,26 +87,13 @@ function addPokemonToList(object) {
 }
 
 function removePokemon(data) {
-    fetch(`http://localhost:3000/pokemons/"${data.dataset.pokemonId}`, {
+    fetch(`http://localhost:3000/pokemons/${data.dataset.pokemonId}`, {
     method: "DELETE",
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-    },
-    body: JSON.stringify({
-        
-    })
+    }
 })
-    .then(function(response) {
-        return response.json();
-        })
-        .then(function(object) {
-        removePokemonFromList(object);
-        });
+    data.parentElement.remove();
 }
 
-function addPokemonToList(object) {
-    let trainer = document.querySelector(`[data-id="${object.trainer_id}"]`);
-
-    
-}
