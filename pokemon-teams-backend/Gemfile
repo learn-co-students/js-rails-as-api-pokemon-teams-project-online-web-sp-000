@@ -41,3 +41,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'faker'
+
+
+#Note: When creating a new Rails app, a .git folder is also generated. However, since this is already a Git repo, it is recommended you remove this folder to prevent issues with submitting to Learn. Make sure you're in the new Rails app and not the parent folder, then run the following to remove the .git file:
+
+#rm -rf .git
