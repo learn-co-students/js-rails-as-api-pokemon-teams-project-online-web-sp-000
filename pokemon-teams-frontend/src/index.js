@@ -1,20 +1,19 @@
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
+const mainDiv = document.querySelector('main')
 
-document.addEventListener('DOMContentLoaded', function() {
-  fetchTrainersAndPokemons()
-  addTrainerCards()
-})
+// document.addEventListener('DOMContentLoaded', function() {
+//   fetchTrainersAndPokemons()
+//   addTrainerCards()
+// })
 
 // When a user loads the page, they should see all trainers, with their current team of Pokemon.
-function fetchTrainersAndPokemons() {
-  fetch("http://localhost:3000/trainers")
-    .then(resp => resp.json())
-    .then(console.log)
-}
+fetch(TRAINERS_URL)
+  .then(resp => resp.json())
+  .then(addTrainerCards)
 
-  // left off here - just trying to create cards for each trainer and add their names from above fetch
+  // create cards for each trainer and add their names from above fetch
 function addTrainerCards(trainers) {
   trainers.forEach(trainer => {
     let pokemonList = ""
@@ -24,5 +23,18 @@ function addTrainerCards(trainers) {
         <button class="release" data-pokemon-id="${pokemon.id}">Release</button>
         </li>`
     })
-})
+    mainDiv.innerHTML += `
+    <div class="card" data-id="${trainer.id}"><p>${trainer.name}<p>
+      <button data-trainer-id="${trainer.id}">Add Pokemon</button>
+      <ul>${pokemonList}</ul>
+    </div>
+    `
+  })
+}
+
+// Whenever a user hits "Add Pokemon" and they have space on their team,
+// they should get a new Pokemon.
+
+function addPokemon() {
+  
 }
