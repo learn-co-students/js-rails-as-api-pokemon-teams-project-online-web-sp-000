@@ -35,30 +35,31 @@ function addTrainerCards(trainers) {
 // Whenever a user hits "Add Pokemon" and they have space on their team,
 // they should get a new Pokemon.
 
-document.querySelector('data-trainer-id').addEventListener('click', addPokemon)
+mainDiv.addEventListener('click', e => {
+    if (e.target.dataset.trainerId !== undefined) {
+      fetch(POKEMONS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          trainer_id: e.target.dataset.trainerId
+        })
+      })
+      .then(resp => resp.json())
+      .then(addPokemonToCard)
+    }
+    if (e.target.dataset.pokemonId !== undefined){
+      e.target.parentElement.remove()
+      fetch(POKEMONS_URL + '/' + e.target.dataset.pokemonId, {method:
+      'DELETE'})
+    }
+  })
 
-function addPokemon() {
-  let newPokemonObj = {
-    nickname: nickname,
-    species: species,
-    // release:
-  }
-
-  let configObj = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(newPokemonObj)
-  }
-
-  fetch(POKEMONS_URL, configObj)
-  .then(resp => resp.json())
-  .then(addPokemonToCard)
-}
-
-function addPokemonToCard() {
-  document.getElementById('toy-collection').appendChild(toyCardDiv)
-
+function addPokemonToCard(pokemon) {
+  console.log(pokemon)
+  mainDiv.children[pokemon.trainer_id-1].lastElementChild.innerHTML +=
+  `<li>${pokemon.nickname} (${pokemon.species})
+    <button class="release" data-pokemon-id="${pokemon.id}">Release</button>
+  </li>`
 }
