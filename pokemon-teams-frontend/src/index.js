@@ -57,7 +57,6 @@ mainDiv.addEventListener('click', e => {
   })
 
 function addPokemonToCard(pokemon) {
-  console.log(pokemon)
   mainDiv.children[pokemon.trainer_id-1].lastElementChild.innerHTML +=
   `<li>${pokemon.nickname} (${pokemon.species})
     <button class="release" data-pokemon-id="${pokemon.id}">Release</button>
