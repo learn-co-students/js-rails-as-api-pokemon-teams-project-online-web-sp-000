@@ -35,6 +35,30 @@ function addTrainerCards(trainers) {
 // Whenever a user hits "Add Pokemon" and they have space on their team,
 // they should get a new Pokemon.
 
+document.querySelector('data-trainer-id').addEventListener('click', addPokemon)
+
 function addPokemon() {
-  
+  let newPokemonObj = {
+    nickname: nickname,
+    species: species,
+    // release:
+  }
+
+  let configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(newPokemonObj)
+  }
+
+  fetch(POKEMONS_URL, configObj)
+  .then(resp => resp.json())
+  .then(addPokemonToCard)
+}
+
+function addPokemonToCard() {
+  document.getElementById('toy-collection').appendChild(toyCardDiv)
+
 }
