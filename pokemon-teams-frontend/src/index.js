@@ -96,10 +96,3 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 
-
-function getButtons(){
-    //debugger;
-
-}
-
-getButtons()
