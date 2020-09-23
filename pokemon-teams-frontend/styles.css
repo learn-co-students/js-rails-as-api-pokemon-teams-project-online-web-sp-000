@@ -24,6 +24,7 @@ body {
   }
   
   div.card {
+    float: left;
     background-color: #eeeeee;
     height: 250px;
     width: 300px;
