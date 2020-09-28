@@ -3,7 +3,7 @@ const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 
-/* FETCH */
+
 
 async function fetchData() {
     let response = await fetch(TRAINERS_URL)
