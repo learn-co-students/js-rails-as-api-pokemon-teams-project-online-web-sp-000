@@ -13,7 +13,7 @@ async function fetchData() {
     })
   }
   
-  /* RENDER TRAINER CARDS */
+  
   
   function createTrainerCard(trainer) {
     const container = document.getElementById("container");
