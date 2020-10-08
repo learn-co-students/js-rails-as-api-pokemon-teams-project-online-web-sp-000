@@ -30,6 +30,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
             addButton.innerText = "Add Pokemon";
             divCard.appendChild(addButton);
 
+            addButton.addEventListener('click', function(addPokemon){
+
+                let formData = {
+                    trainer_id: addButton.getAttribute('data-trainer-id')
+                };
+                   
+                let configObj = {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                  };
+                   
+                  fetch("http://127.0.0.1:3000/pokemons", configObj)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(object) {
+                        console.log(object);
+                    })
+                    .catch(function(error) {
+                        alert("Sorry, can't successfully add a new Pokemon to team!");
+                        console.log(error.message);
+                    });   
+                    
+            });
+
+
             const unorderedList = document.createElement('ul');
             for (let i = 0; i < trainer.pokemons.length; i++){
                 const specificPokemon = document.createElement('li')
@@ -48,5 +78,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       })    
 
-
 });
+
+
