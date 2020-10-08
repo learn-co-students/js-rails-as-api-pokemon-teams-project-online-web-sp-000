@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     trainer_id: addButton.getAttribute('data-trainer-id')
                 };
                    
+
                 let configObj = {
                     method: "POST",
                     headers: {
@@ -46,7 +47,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   };
                    
                   fetch("http://127.0.0.1:3000/pokemons", configObj)
+
                     .then(function(response) {
+                        console.log('@@Responding...', response);
                         return response.json();
                     })
                     .then(function(object) {
