@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             divCard.appendChild(addButton);
 
             addButton.addEventListener('click', function(addPokemon){
+                
+                addPokemon.preventDefault();
 
                 let formData = {
                     trainer_id: addButton.getAttribute('data-trainer-id')
@@ -73,6 +75,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 releaseButton.innerText = "Release"
                 specificPokemon.appendChild(releaseButton)
                 unorderedList.appendChild(specificPokemon)
+
+                releaseButton.addEventListener('click', function(releasePokemon){
+
+                    releasePokemon.preventDefault();
+
+                    let formData = {
+                        pokemon_id: releaseButton.getAttribute('data-pokemon-id')
+                    };
+                       
+    
+                    let configObj = {
+                        method: "DELETE",
+                        headers: {
+                          "Content-Type": "application/json",
+                          "Accept": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                      };
+                       
+                      fetch("http://127.0.0.1:3000/pokemons", configObj)
+    
+                        .then(function(response) {
+                            console.log('@@Deleting...', response);
+                            return response.json();
+                        })
+                        .then(function(object) {
+                            console.log(object);
+                        })
+                        .catch(function(error) {
+                            alert("Sorry, can't successfully add a new Pokemon to team!");
+                            console.log(error.message);
+                        });   
+                        
+                });                
+                
+
             }      
             
             divCard.appendChild(unorderedList)
