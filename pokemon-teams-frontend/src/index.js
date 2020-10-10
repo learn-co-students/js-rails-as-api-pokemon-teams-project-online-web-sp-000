@@ -5,27 +5,31 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 const main = document.querySelector("main")
 
-document.addEventListener('DOMContentLoaded', () => loadTrainers)
+document.addEventListener('DOMContentLoaded', () => loadTrainers())
 
+function loadTrainers(){
 
-const loadTrainers = () => {
-
+    console.log('@@LoadTrainers')
     fetch(TRAINERS_URL)
-        .then(res => res.json())
+
+        .then(function(response) {
+            return response.json();
+        })        
         .then(json => {
-            forEach(trainer => renderTrainer(trainer))
+            json.forEach(trainer => renderTrainer(trainer))        
         })
+
 }
 
 const renderTrainer =  (trainerHash) => {   
-    const div = docuement.createElement("div")
+    const div = document.createElement("div")
     const p = document.createElement("p")
     const button = document.createElement("button")
     const ul = document.createElement("ul")
 
     div.setAttribute("class", "card")
     div.setAttribute("data-id", trainerHash.id)
-    p.innerText = trainerHash.named
+    p.innerText = trainerHash.name
     button.setAttribute("data-trainer-id", trainerHash.id)
     button.innerText = "Add Pokemon"
     //attach event listiner to button class
