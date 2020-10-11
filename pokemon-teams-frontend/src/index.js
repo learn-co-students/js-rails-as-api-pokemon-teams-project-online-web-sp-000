@@ -44,7 +44,8 @@ const renderTrainer =  (trainerHash) => {
 
 
 function renderPokemon(pokemon){
-    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+
+    const divCard = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
     const li = document.createElement("li")
     const button = document.createElement("button")
 
@@ -55,6 +56,7 @@ function renderPokemon(pokemon){
     button.addEventListener('click', deletePokemon)
 
     li.appendChild(button)
+    const ul = divCard.querySelector('ul')
     ul.appendChild(li)
 }
 
@@ -97,131 +99,14 @@ const deletePokemon = (e) => {
         }
     }
 
-    fetch(`{POKEMONS_URL}/${e.target.dataset.pokemonId}`, configObj)
+    const selectedPokemon = e.target.dataset.pokemonId
+    const pokemonPATH =  POKEMONS_URL + '/' + selectedPokemon
+    fetch(pokemonPATH, configObj)
     e.target.parentElement.remove()
+
 
 }
 
 
-
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     console.log('DOM fully loaded and parsed');
-
-//     const main = document.querySelector('main');
-
-//     fetch(TRAINERS_URL)
-//     .then(function(response) {
-//         return response.json();
-//       })
-//       .then(function(trainers){
-//         console.log('@@Hello', trainers)
-//         for (trainer of trainers){
-//             console.log('@@Trainer', trainer.name)
-//             const divCard = document.createElement('div');
-//             divCard.className = "card";
-//             divCard.setAttribute("data-id", trainer.id);
-//             main.appendChild(divCard);
-
-//             const trainerName = document.createElement('p');
-//             divCard.appendChild(trainerName);
-//             trainerName.innerText = trainer.name;            
-
-//             const addButton = document.createElement('button');
-//             addButton.setAttribute("data-trainer-id", trainer.id);
-//             addButton.innerText = "Add Pokemon";
-//             divCard.appendChild(addButton);
-
-//             addButton.addEventListener('click', function(addPokemon){
-                
-//                 addPokemon.preventDefault();
-
-//                 let formData = {
-//                     trainer_id: addButton.getAttribute('data-trainer-id')
-//                 };
-                   
-
-//                 let configObj = {
-//                     method: "POST",
-//                     headers: {
-//                       "Content-Type": "application/json",
-//                       "Accept": "application/json"
-//                     },
-//                     body: JSON.stringify(formData)
-//                   };
-                   
-//                   fetch(POKEMONS_URL, configObj)
-
-//                     .then(function(response) {
-//                         console.log('@@Responding...', response);
-//                         return response.json();
-//                     })
-//                     .then(function(object) {
-//                         console.log(object);
-//                     })
-//                     .catch(function(error) {
-//                         alert("Sorry, can't successfully add a new Pokemon to team!");
-//                         console.log(error.message);
-//                     });   
-                    
-//             });
-
-
-//             const unorderedList = document.createElement('ul');
-//             for (let i = 0; i < trainer.pokemons.length; i++){
-//                 const specificPokemon = document.createElement('li')
-//                 specificPokemon.innerText = trainer.pokemons[i].nickname + ' ' + '(' + trainer.pokemons[i].species + ')'
-//                 const releaseButton = document.createElement('button')
-//                 releaseButton.className = 'release'
-//                 releaseButton.setAttribute("data-pokemon-id", trainer.pokemons[i].id)
-//                 releaseButton.innerText = "Release"
-//                 specificPokemon.appendChild(releaseButton)
-//                 unorderedList.appendChild(specificPokemon)
-
-//                 releaseButton.addEventListener('click', function(releasePokemon){
-
-//                     releasePokemon.preventDefault();
-
-//                     let formData = {
-//                         pokemon_id: releaseButton.getAttribute('data-pokemon-id')
-//                     };
-                       
-    
-//                     let configObj = {
-//                         method: "DELETE",
-//                         headers: {
-//                           "Content-Type": "application/json",
-//                           "Accept": "application/json"
-//                         },
-//                         body: JSON.stringify(formData)
-//                       };
-                       
-//                       fetch(POKEMONS_URL, configObj)
-    
-//                         .then(function(response) {
-//                             console.log('@@Deleting...', response);
-//                             return response.json();
-//                         })
-//                         .then(function(object) {
-//                             unorderedList.removeChild(specific_pokemon);
-//                             console.log(object);
-//                         })
-//                         .catch(function(error) {
-//                             alert("Sorry, can't successfully add a new Pokemon to team!");
-//                             console.log(error.message);
-//                         });   
-                        
-//                 });                
-                
-
-//             }      
-            
-//             divCard.appendChild(unorderedList)
-
-//         }
-
-//       })    
-
-// });
 
 
