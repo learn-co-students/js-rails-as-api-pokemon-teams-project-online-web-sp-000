@@ -30,10 +30,14 @@ function addTrainersToCards(trainers) {
     let card = document.createElement("div");
     let cardName = document.createElement("p");
     let name = trainer.name;
+    let button = document.createElement("button");
+    button.dataset.trainerId = trainer.id;
+    button.textContent = "Add Pokemon"
     card.dataset.id = trainer.id;
     card.className = "card";
     cardName.innerHTML = name;
     card.appendChild(cardName);
+    card.appendChild(button);
     document.querySelector("main").appendChild(card)
     //create parse pokemon method
   }
