@@ -53,17 +53,27 @@ function parseTrainersPokemons(trainer) {
     let nickname = pokemon.nickname
     let species = pokemon.species
     let trainerId = pokemonTrainer.id
+    let pokemonId = pokemon.id
     console.log(nickname, species, trainerId)
-    addPokemonToTrainerCard(nickname, species, trainerId)
+    addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
     //for each pokemon, add to trainer card addPokemonToTrainerCard(nickname, species, trainer.id)
   }
 }
 
-function addPokemonToTrainerCard(nickname, species, trainerId) {
+function addPokemonToTrainerCard(nickname, species, trainerId, pokemonId) {
   let pokemonList = document.createElement("ul");
   let li = document.createElement("li");
-  let div = document.querySelector(`[data-id="${trainerId}"]`)
+  console.log(li)
+  let div = document.querySelector(`[data-id="${trainerId}"]`);
+  let releaseButton = document.createElement("button");
+  releaseButton.className = "release"
+  releaseButton.dataset.pokemonId = pokemonId
+  releaseButton.textContent = "Release"
   div.appendChild(li)
   li.textContent = `${nickname} (${species})`
+  li.appendChild(releaseButton)
+  //(${species})"
 }
+
+//create function to add
 //when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
