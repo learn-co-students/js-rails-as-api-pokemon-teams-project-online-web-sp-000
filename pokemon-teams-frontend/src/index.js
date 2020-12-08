@@ -39,7 +39,7 @@ function addTrainersToCards(trainers) {
     card.appendChild(cardName);
     card.appendChild(button);
     document.querySelector("main").appendChild(card)
-    //create parse pokemon method
+    parseTrainersPokemons(trainer)
   }
 
 }
@@ -47,15 +47,23 @@ function addTrainersToCards(trainers) {
 //parse pokemon method
 function parseTrainersPokemons(trainer) {
   const trainerPokemons = trainer.pokemons
+  console.log(trainer.pokemons)
   for (const pokemon of trainerPokemons) {
+    let pokemonTrainer = trainer
     let nickname = pokemon.nickname
     let species = pokemon.species
+    let trainerId = pokemonTrainer.id
+    console.log(nickname, species, trainerId)
+    addPokemonToTrainerCard(nickname, species, trainerId)
     //for each pokemon, add to trainer card addPokemonToTrainerCard(nickname, species, trainer.id)
   }
 }
 
-function addPokemonToTrainerCard() {
+function addPokemonToTrainerCard(nickname, species, trainerId) {
   let pokemonList = document.createElement("ul");
   let li = document.createElement("li");
+  let div = document.querySelector(`[data-id="${trainerId}"]`)
+  div.appendChild(li)
+  li.textContent = `${nickname} (${species})`
 }
 //when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
