@@ -7,7 +7,11 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 //should probably do this in response to DOM loading
 
 document.addEventListener("DOMContentLoaded", () => {
-  //add method to feth all trainers
+  retrieveTrainers()
+  addTrainersToCards(trainers)
+  parseTrainersPokemons(trainer)
+  addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
+  createReleaseEvent(releaseButton)
 });
 
 function retrieveTrainers() {
@@ -54,7 +58,6 @@ function parseTrainersPokemons(trainer) {
     let species = pokemon.species
     let trainerId = pokemonTrainer.id
     let pokemonId = pokemon.id
-    console.log(nickname, species, trainerId)
     addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
     //for each pokemon, add to trainer card addPokemonToTrainerCard(nickname, species, trainer.id)
   }
@@ -63,17 +66,23 @@ function parseTrainersPokemons(trainer) {
 function addPokemonToTrainerCard(nickname, species, trainerId, pokemonId) {
   let pokemonList = document.createElement("ul");
   let li = document.createElement("li");
-  console.log(li)
   let div = document.querySelector(`[data-id="${trainerId}"]`);
   let releaseButton = document.createElement("button");
   releaseButton.className = "release"
-  releaseButton.dataset.pokemonId = pokemonId
+  releaseButton.dataset.pokemonId = `${pokemonId}`
   releaseButton.textContent = "Release"
+  createReleaseEvent(releaseButton)
   div.appendChild(li)
   li.textContent = `${nickname} (${species})`
   li.appendChild(releaseButton)
-  //(${species})"
+  //add event listener to button
 }
 
-//create function to add
+function createReleaseEvent(releaseButton) {
+  releaseButton.addEventListener("click", event => {
+    //method to remove pokemon from trainer
+    console.log("you done clicked it!")
+  })
+}
+//remove will remove pokemon from trainer's team (post request to udpate database and update dom)
 //when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
