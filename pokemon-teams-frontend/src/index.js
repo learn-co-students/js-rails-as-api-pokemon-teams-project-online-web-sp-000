@@ -130,8 +130,14 @@ function generateRandomPokemon(trainer) {
     return response.json();
   })
   .then(function(object) {
-    console.log(object)
-    //add pokemon information addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
+    //console.log(object)
+    let nickname = object.nickname
+    let species = object.species
+    let trainerId = object.trainer_id
+    let pokemonId = object.id
+    //add pokemon information
+    //let
+    addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
   })
 
 }
