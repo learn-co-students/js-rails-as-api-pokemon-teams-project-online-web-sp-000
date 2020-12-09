@@ -5,7 +5,7 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 // for each trainer returned by the trainer endpoint add trainer to card
 
 //should probably do this in response to DOM loading
-
+let trainers
 document.addEventListener("DOMContentLoaded", () => {
   retrieveTrainers()
   addTrainersToCards(trainers)
@@ -102,12 +102,36 @@ function releasePokemon(pokemon) {
 
 function addPokemonButton(button) {
   button.addEventListener("click", event => {
-    console.log(event.target.nextSibling.childElementCount)
-    //if (event.target.nextSibling.)
+    console.log(event.target.dataset.trainerId)
+    let trainer = event.target.dataset.trainerId
+    if (event.target.nextSibling.childElementCount <= 6) {
+      generateRandomPokemon(trainer)
+      //add element to trainer card method
+    }
+    //otherwise do nothing
   })
 }
 
-//build out function where if ul element childcount is <6, add a new pokemon
-//define function when clicked to post to pokemon to remove from trainer
-//remove will remove pokemon from trainer's team (post request to udpate database and update dom)
-//when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
+
+function generateRandomPokemon(trainer) {
+//post request to create pokemon endpoint
+  let trainer_id = trainer
+   return fetch("http://localhost:3000/pokemons", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      "trainer_id": `${trainer_id}`
+    })
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(object) {
+    console.log(object)
+    //add pokemon information addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
+  })
+
+}
