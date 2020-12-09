@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   addTrainersToCards(trainers)
   parseTrainersPokemons(trainer)
   addPokemonToTrainerCard(nickname, species, trainerId, pokemonId)
-  createReleaseEvent(releaseButton)
+  //createReleaseEvent(releaseButton)
 });
 
 function retrieveTrainers() {
@@ -35,6 +35,7 @@ function addTrainersToCards(trainers) {
     let cardName = document.createElement("p");
     let name = trainer.name;
     let button = document.createElement("button");
+    let pokemonList = document.createElement("ul");
     button.dataset.trainerId = trainer.id;
     button.textContent = "Add Pokemon"
     card.dataset.id = trainer.id;
@@ -42,6 +43,7 @@ function addTrainersToCards(trainers) {
     cardName.innerHTML = name;
     card.appendChild(cardName);
     card.appendChild(button);
+    card.appendChild(pokemonList);
     document.querySelector("main").appendChild(card)
     parseTrainersPokemons(trainer)
   }
@@ -64,25 +66,37 @@ function parseTrainersPokemons(trainer) {
 }
 
 function addPokemonToTrainerCard(nickname, species, trainerId, pokemonId) {
-  let pokemonList = document.createElement("ul");
+  //let pokemonList = document.createElement("ul");
   let li = document.createElement("li");
   let div = document.querySelector(`[data-id="${trainerId}"]`);
+  let divUl = div.childNodes[2]
   let releaseButton = document.createElement("button");
   releaseButton.className = "release"
   releaseButton.dataset.pokemonId = `${pokemonId}`
   releaseButton.textContent = "Release"
   createReleaseEvent(releaseButton)
-  div.appendChild(li)
+  divUl.appendChild(li)
   li.textContent = `${nickname} (${species})`
   li.appendChild(releaseButton)
-  //add event listener to button
 }
 
 function createReleaseEvent(releaseButton) {
   releaseButton.addEventListener("click", event => {
-    //method to remove pokemon from trainer
     console.log("you done clicked it!")
+    let releasedPokemon = event.target.dataset.pokemonId
+    releasePokemon(releasedPokemon)
   })
 }
+
+function releasePokemon(pokemon) {
+  fetch(`http://localhost:3000/pokemons/${pokemon}`, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data) //maybe make error banner for this
+  })
+}
+//define function when clicked to post to pokemon to remove from trainer
 //remove will remove pokemon from trainer's team (post request to udpate database and update dom)
 //when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
