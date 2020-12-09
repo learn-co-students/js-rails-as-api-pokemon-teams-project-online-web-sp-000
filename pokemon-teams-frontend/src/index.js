@@ -38,6 +38,7 @@ function addTrainersToCards(trainers) {
     let pokemonList = document.createElement("ul");
     button.dataset.trainerId = trainer.id;
     button.textContent = "Add Pokemon"
+    addPokemonButton(button)
     card.dataset.id = trainer.id;
     card.className = "card";
     cardName.innerHTML = name;
@@ -98,6 +99,15 @@ function releasePokemon(pokemon) {
     console.log(data) //maybe make error banner for this
   })
 }
+
+function addPokemonButton(button) {
+  button.addEventListener("click", event => {
+    console.log(event.target.nextSibling.childElementCount)
+    //if (event.target.nextSibling.)
+  })
+}
+
+//build out function where if ul element childcount is <6, add a new pokemon
 //define function when clicked to post to pokemon to remove from trainer
 //remove will remove pokemon from trainer's team (post request to udpate database and update dom)
 //when a user hits add pokemon, and the trainer has space, trainer gets a random new pokeomn?
