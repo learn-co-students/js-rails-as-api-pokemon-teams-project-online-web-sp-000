@@ -2,6 +2,8 @@ class PokemonsController < ApplicationController
 
   def create
     trainer = params[:trainer_id]
+    Pokemon.random_pokemon(trainer)
+    render json: pokemon
     #create model method to generate random pokemon
   end
 
