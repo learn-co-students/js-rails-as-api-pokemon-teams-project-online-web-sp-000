@@ -84,6 +84,7 @@ function createReleaseEvent(releaseButton) {
   releaseButton.addEventListener("click", event => {
     console.log("you done clicked it!")
     let releasedPokemon = event.target.dataset.pokemonId
+    event.target.parentElement.parentElement.removeChild(event.target.parentElement)
     releasePokemon(releasedPokemon)
   })
 }
