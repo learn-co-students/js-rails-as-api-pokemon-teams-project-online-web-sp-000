@@ -2,138 +2,90 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
-document.addEventListener("DOMContentLoaded", getTrainers)
+const main = document.querySelector("main")
 
-function getTrainers() {
-    
+document.addEventListener("DOMContentLoaded", () => loadTrainers())
+
+const loadTrainers = () => {
     fetch(TRAINERS_URL)
-        .then(res => res.json())
-        .then(trainers => {
-            trainers.data.forEach(trainer => {
-                addTrainer(trainer)
-            })
-        })          
-}
-
-function addTrainer(trainer) {
-    // Assign Elements
-    const main = document.querySelector("main")
-    const cardDiv = document.createElement("div")
-    const trainerP = document.createElement("p")
-    const addPokeBtn = document.createElement("button")
-    
-
-
-    // Set Attributes and Content
-    cardDiv.setAttribute("class", "card")
-    trainerP.setAttribute("data-id", trainer.id)
-    trainerP.textContent = trainer.attributes.name
-    addPokeBtn.setAttribute("data-trainer-id", trainer.id)
-    addPokeBtn.textContent = "Add Pokemon"
-    
-    addPokeBtn.addEventListener("click", event => {
-        addPokemon(trainer, event)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(trainer => renderTrainer(trainer))
     })
     
-    
+}
+
+const renderTrainer = (trainerHash) => {
+    const div = document.createElement("div")
+    const p = document.createElement("p")
+    const button = document.createElement("button")
     const ul = document.createElement("ul")
 
-    trainer.attributes.pokemons.forEach(pokemon => {
-        const li = document.createElement("li")
-        const releasePokeBtn = document.createElement("button")
+    div.setAttribute("class", "card")
+    div.setAttribute("data-id", trainerHash.id )
+    p.innerHTML = trainerHash.name
+    button.setAttribute("data-trainer-id", trainerHash.id)
+    button.innerHTML = "Add Pokemon"
+    button.addEventListener("click", createPokemon)
 
-        releasePokeBtn.setAttribute("class", "release")
-        releasePokeBtn.setAttribute("data-pokemon-id", pokemon.id)
-        releasePokeBtn.textContent = "Release"
+    div.appendChild(p)
+    div.appendChild(button)
+    div.appendChild(ul)
 
-        releasePokeBtn.addEventListener("click", event => {
-            releasePokemon(pokemon, event)
-        })
+    main.appendChild(div)
 
-        li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
-        li.appendChild(releasePokeBtn)
-        ul.appendChild(li)
-    })
-
-    // Append Elements
-    
-    cardDiv.appendChild(trainerP)
-    cardDiv.appendChild(addPokeBtn)
-    cardDiv.appendChild(ul)
-
-    
-    main.append(cardDiv)   
+    trainerHash.pokemons.forEach(pokemon => renderPokemon(pokemon))
 }
 
-// Event Handlers
+const renderPokemon = (pokemon) => {
+    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+        
 
-function addPokemon(trainer, event) {
+    const li = document.createElement("li")
+    const button = document.createElement("button")
+
+    li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
+    button.setAttribute("class", "release")
+    button.setAttribute("data-pokemon-id", pokemon.id)
+    button.innerHTML = "Release"
+    button.addEventListener("click", deletePokemon)
+
+    li.appendChild(button)
+    ul.appendChild(li)
+}
+
+const createPokemon = (event) => {
     event.preventDefault()
-    const ul = event.target.parentElement.lastChild
-
-    fetch(POKEMONS_URL, {
+    const configObj = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            "trainer_id": trainer.id
+            trainer_id: event.target.dataset.trainerId
         })
-    })
+    }
+    fetch(POKEMONS_URL, configObj)
     .then(res => res.json())
-    .then(result => {
-        console.log(result)
-        if(result["status"] === "error"){
-            alert(result["message"])
+    .then(json => {
+        if (json.message) {
+            alert(json.message)
+        } else {
+            renderPokemon(json)
         }
-        else{
-            newPokemon = result.data.attributes
-            console.log("HELLO!!!!")
-            console.log(`This newPokemon's id is${newPokemon.id}`)
-
-            const li = document.createElement("li")
-            const releasePokeBtn = document.createElement("button")
-
-            releasePokeBtn.setAttribute("class", "release")
-            releasePokeBtn.setAttribute("data-pokemon-id", newPokemon.id)
-            releasePokeBtn.textContent = "Release"
-
-            releasePokeBtn.addEventListener("click", event => {
-                releasePokemon(newPokemon, event)
-            })
-
-            li.innerHTML = `${newPokemon.nickname} (${newPokemon.species})`
-            li.appendChild(releasePokeBtn)
-            ul.appendChild(li)
-        }
-        
     })
 }
 
-function releasePokemon(pokemon, event) {
-    console.log(pokemon)
-    console.log("Clicked!!!")
+const deletePokemon = (event) => {
     event.preventDefault()
-
-    fetch(`${POKEMONS_URL}/${pokemon.id}`, {
+    const configObj = {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
-    })
-    // .then(res => {
-    //         console.log(res)
-    //      return res.json()
-    //     })
-    // .then(result => {
-    //     console.log(result)
-        event.target.parentElement.remove()
-    // })
-    
+    }
+    fetch(`${POKEMONS_URL}/${event.target.dataset.pokemonId}`, configObj)
+    event.target.parentElement.remove()
 }
-
-
-
-

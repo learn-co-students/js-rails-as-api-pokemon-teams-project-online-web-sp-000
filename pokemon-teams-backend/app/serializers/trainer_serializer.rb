@@ -1,5 +1,4 @@
-class TrainerSerializer
-  include FastJsonapi::ObjectSerializer
+class TrainerSerializer < ActiveModel::Serializer
+  attributes :id, :name
   has_many :pokemons
-  attributes :name, :pokemons
 end
