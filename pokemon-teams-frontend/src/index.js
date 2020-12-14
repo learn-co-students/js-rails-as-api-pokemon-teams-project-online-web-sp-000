@@ -57,8 +57,40 @@ const renderPokemons = (pokemon) => {
     return li
 }
 
-const createPokemon = () => {
-    debugger
+const createPokemon = (event) => {
+    event.preventDefault()
+    const trainerId = event.target.parentElement.dataset.id
+    const trainerData = {
+        trainer_id: Number(trainerId)
+    }
+    const configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(trainerData)
+    }
+    fetch(POKEMONS_URL, configObj)
+        .then(res => res.json())
+        .then(pokeData => {
+            const addButton = document.querySelector(`button[data-trainer-id="${pokeData.trainer.id}"]`)
+            const pokemonList = addButton.nextSibling
+            const li = document.createElement("li")
+            const button = document.createElement("button")
+
+            li.innerText = `${pokeData.nickname} (${pokeData.species})`
+            button.setAttribute("class", "release")
+            button.setAttribute("data-pokemon-id", pokeData.id)
+            button.innerText = "Release"
+            li.appendChild(button)
+            pokemonList.appendChild(li)
+        })
+        .catch(error => {
+            alert(error.message)
+        })
 }
 
-const releasePokemon = () => {}
+const releasePokemon = (event) => {
+    event.preventDefault()
+}
