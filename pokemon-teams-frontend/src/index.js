@@ -35,26 +35,30 @@ const renderTrainer = (trainer) => {
     addButton.setAttribute("data-trainer-id", trainer.id)
     addButton.innerText = "Add Pokemon"
         // attatch event listener to button(click)
-
-    // trainer.pokemons.forEach(pokemon => {
-    //     pokemonList.innerHTML += `<li>${pokemon.nickname} (${pokemon.species})
-    //     <button class="release" data-pokemon-id="${pokemon.id}">Release</button></li>`
-    // })
-    trainer.pokemons.forEach(pokemon => renderPokemons(pokemon))
+    addButton.addEventListener("click", createPokemon)
+    trainer.pokemons.forEach(pokemon => pokemonList.appendChild(renderPokemons(pokemon)))
     card.appendChild(nameTag)
     card.appendChild(addButton)
     card.appendChild(pokemonList)
-
     main.appendChild(card)
 }
 
 const renderPokemons = (pokemon) => {
-    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+    const div = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
     const li = document.createElement("li")
     const button = document.createElement("button")
 
     li.innerText = `${pokemon.nickname} (${pokemon.species})`
-    button.setAttribute("button", "release")
+    button.setAttribute("class", "release")
     button.setAttribute("data-pokemon-id", pokemon.id)
     button.innerText = "Release"
+    button.addEventListener("click", releasePokemon)
+    li.appendChild(button)
+    return li
 }
+
+const createPokemon = () => {
+    debugger
+}
+
+const releasePokemon = () => {}
