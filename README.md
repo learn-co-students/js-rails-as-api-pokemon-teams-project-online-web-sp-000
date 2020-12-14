@@ -170,7 +170,7 @@ Now the `rails s` command should start the server on port 3000 without issues.
 
 The frontend should be started by accessing the folder pokemon-teams-frontend (`cd pokemon-teams-frontend`) and, in a new terminal window, run `open index.html` or simply right-click on the file name and select `open in browser` if this option is available.
 
-**Keep the rails server running since our frontend will fire requests to our backend API in order to retrieve the existing Trainers and Pokemons, as well as performing other actions like creating and deleting Pokemons. If you would like to run tests while the server is running, you will need to open a second terminal window.**
+**Keep the rails server running since our frontend will fire requests to our backend API in order to retrieve the existing Trainers and Pokemons, as well as performing other actions like creating and deleting Pokemons.**
 
 ### Suggested HTML
 
