@@ -59,7 +59,7 @@ const renderPokemons = (pokemon) => {
 
 const createPokemon = (event) => {
     event.preventDefault()
-    const trainerId = event.target.parentElement.dataset.id
+    const trainerId = event.target.dataset.trainerId
     const trainerData = {
         trainer_id: Number(trainerId)
     }
@@ -74,23 +74,61 @@ const createPokemon = (event) => {
     fetch(POKEMONS_URL, configObj)
         .then(res => res.json())
         .then(pokeData => {
-            const addButton = document.querySelector(`button[data-trainer-id="${pokeData.trainer.id}"]`)
-            const pokemonList = addButton.nextSibling
-            const li = document.createElement("li")
-            const button = document.createElement("button")
+            if (pokeData.message) {
+                alert(pokeData.message)
+            } else {
+                addPokemon(pokeData)
+            }
+        })
+        // .catch(error => {
+        //     alert(error.message)
+        // })
+}
 
-            li.innerText = `${pokeData.nickname} (${pokeData.species})`
-            button.setAttribute("class", "release")
-            button.setAttribute("data-pokemon-id", pokeData.id)
-            button.innerText = "Release"
-            li.appendChild(button)
-            pokemonList.appendChild(li)
-        })
-        .catch(error => {
-            alert(error.message)
-        })
+const addPokemon = (pokeData) => {
+    const addButton = document.querySelector(`button[data-trainer-id="${pokeData.trainer.id}"]`)
+    const pokemonList = addButton.nextSibling
+    const li = document.createElement("li")
+    const button = document.createElement("button")
+
+    li.innerText = `${pokeData.nickname} (${pokeData.species})`
+    button.setAttribute("class", "release")
+    button.setAttribute("data-pokemon-id", pokeData.id)
+    button.innerText = "Release"
+    li.appendChild(button)
+    pokemonList.appendChild(li)
 }
 
 const releasePokemon = (event) => {
     event.preventDefault()
+        /*
+        #=> Example Request
+            DELETE /pokemons/:pokemon_id
+            
+            #=> Example Response
+            {"id":147,
+            "nickname":"Gunnar",
+            "species":"Weepinbell",
+            "trainer_id":1}
+         */
+    const configObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }
+        // let pokemonsUrl = POKEMONS_URL.concat(`/${event.target.dataset.pokemonId}`)
+    fetch(`${POKEMONS_URL}/${event.target.dataset.pokemonId}`, configObj)
+    event.target.parentElement.remove()
+        // .then(pokeData => {
+        //     debugger
+
+    //     const releaseButton = document.querySelector(`
+    // button[data - pokemon - id = "${pokeData.id}"]
+    //     `)
+    // //     const li = releaseButton.parentElement
+    // //     const ul = li.parentElement
+    // //     ul.removeChild(li)
+    // // })
 }
