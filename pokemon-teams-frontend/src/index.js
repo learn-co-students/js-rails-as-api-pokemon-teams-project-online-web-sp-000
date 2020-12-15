@@ -60,7 +60,9 @@ function addPokemon(e){
 
 // function addPokemon(e){
 //     let trainerId = e.target.attributes["data-trainer-id"].value; //get the trainers id
-//     let thisTrainer = getTrainer(trainerId)
+//     let thisTrainer = {}
+//     getTrainer(trainerId)
+//     // console.log(thisTrainer)
 //     if (thisTrainer.pokemon.length < 6 ){
 //         getPokemon(trainerId)
 //     }else{
@@ -69,11 +71,12 @@ function addPokemon(e){
 // }
 
 // function getTrainer(trainerId){
-//     fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
+//     return fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
 //         .then(resp => resp.json()) // converth the response to JSON
 //         .then(json => {
-//             thisTrainer.push(json)
-//             return thisTrainer
+//             thisTrainer = json
+//             console.log(thisTrainer)
+//             // return thisTrainer
 //         });     
 // }
 
@@ -134,7 +137,7 @@ function releasePoketMonsters(e){
     return fetch(`${POKEMONS_URL}/${id}`, configObj)
         .then(resp => resp.json())
         .then(json => {
-            alert(`${json.nickname} the ${json.species} has now passed on to anther realm`)
+            alert(`${json.nickname} the ${json.species} has now passed on to anther realm.`)
         })
         .catch(function(error){
             alert("NOOOOOO!");
