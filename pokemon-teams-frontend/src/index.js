@@ -32,16 +32,15 @@ const renderTrainer = (trainerHash) => {
     div.appendChild(button)
     div.appendChild(ul)
 
-    main.appendChild(div)
-
+    main.appendChild(div
+        )
     trainerHash.pokemons.forEach(pokemon => renderPokemon(pokemon))
 }
 
 const renderPokemon = (pokemon) => {
-    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
-        
-
-    const li = document.createElement("li")
+    const div = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+    const ul = document.createElement("ul")
+    const li = document.createElement("li")   
     const button = document.createElement("button")
 
     li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
@@ -52,6 +51,7 @@ const renderPokemon = (pokemon) => {
 
     li.appendChild(button)
     ul.appendChild(li)
+    div.appendChild(li)
 }
 
 const createPokemon = (event) => {
