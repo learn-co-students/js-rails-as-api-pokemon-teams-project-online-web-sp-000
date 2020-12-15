@@ -53,17 +53,29 @@ function addPokemon(e){
     let list = e.target.nextSibling
     if (list.children.length < 6 ){
         getPokemon(trainerId)
+    }else{
+        alert('You already have 6 pokemon!');
     };
 }
 
-function getTrainer(trainerId){
-    fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
-        .then(resp => resp.json()) // converth the response to JSON
-        .then(json => {
-            newTrainer.push(json)
-            return newTrainer
-        });     
-}
+// function addPokemon(e){
+//     let trainerId = e.target.attributes["data-trainer-id"].value; //get the trainers id
+//     let thisTrainer = getTrainer(trainerId)
+//     if (thisTrainer.pokemon.length < 6 ){
+//         getPokemon(trainerId)
+//     }else{
+//         alert('You already have 6 pokemon!');
+//     };
+// }
+
+// function getTrainer(trainerId){
+//     fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
+//         .then(resp => resp.json()) // converth the response to JSON
+//         .then(json => {
+//             thisTrainer.push(json)
+//             return thisTrainer
+//         });     
+// }
 
 function getPokemon(id){
     let formData= {
