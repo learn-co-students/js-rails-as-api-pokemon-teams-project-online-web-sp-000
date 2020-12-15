@@ -48,37 +48,38 @@ function listPokemon(json){
     })
 }
 
-function addPokemon(e){
-    let trainerId = e.target.attributes["data-trainer-id"].value; //get the trainers id
-    let list = e.target.nextSibling
-    if (list.children.length < 6 ){
-        getPokemon(trainerId)
-    }else{
-        alert('You already have 6 pokemon!');
-    };
-}
-
 // function addPokemon(e){
 //     let trainerId = e.target.attributes["data-trainer-id"].value; //get the trainers id
-//     let thisTrainer = {}
-//     getTrainer(trainerId)
-//     // console.log(thisTrainer)
-//     if (thisTrainer.pokemon.length < 6 ){
+//     let list = e.target.nextSibling
+//     if (list.children.length < 6 ){
 //         getPokemon(trainerId)
 //     }else{
 //         alert('You already have 6 pokemon!');
 //     };
 // }
 
-// function getTrainer(trainerId){
-//     return fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
-//         .then(resp => resp.json()) // converth the response to JSON
-//         .then(json => {
-//             thisTrainer = json
-//             console.log(thisTrainer)
-//             // return thisTrainer
-//         });     
-// }
+function addPokemon(e){
+    let trainerId = e.target.attributes["data-trainer-id"].value; //get the trainers id
+    let thisTrainer = {}
+    thisTrainer = getTrainer(trainerId)
+    // console.log(thisTrainer)
+    if (thisTrainer.pokemon.length < 6 ){
+        getPokemon(trainerId)
+    }else{
+        alert('You already have 6 pokemon!');
+    };
+}
+
+function getTrainer(trainerId){
+    return fetch(`${TRAINERS_URL}/${trainerId}`) // fetch the trainers ID
+        .then(resp => resp.json()) // converth the response to JSON
+        .then(json => {
+            thisTrainer = json
+            return thisTrainer
+            console.log(thisTrainer)
+            // return thisTrainer
+        });     
+}
 
 function getPokemon(id){
     let formData= {
