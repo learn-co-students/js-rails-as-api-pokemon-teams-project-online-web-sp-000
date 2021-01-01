@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'trainers#index'
   resources :pokemons
   resources :trainers, only: [:index, :show]
 
