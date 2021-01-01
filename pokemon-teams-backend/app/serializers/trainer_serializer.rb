@@ -1,4 +1,4 @@
 class TrainerSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :pokemon => {except: [:created_at, :updated_at]}
 end
