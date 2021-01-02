@@ -51,6 +51,7 @@ function releasePokemon(e) {
     console.log(`Goodbyeeee ${e.target.dataset.id}`);
     let boot = e.target.dataset.id;
     // remove_pokemon(boot);
+    // On Click - delete pokemon.id from database
     ajax({
         type: "DELETE",
         // url: "{{ URL::route('someroute') }}"
