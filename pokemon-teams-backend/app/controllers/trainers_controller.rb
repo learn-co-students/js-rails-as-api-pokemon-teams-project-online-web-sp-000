@@ -22,7 +22,8 @@ class TrainersController < ApplicationController
     end
 
     def remove_pokemon
-        self.pokemons.find_by(params[:id]).destroy
-        redirect_to '/'
+        # binding.pry
+        render json: Pokemon.find_by(params[:id]).destroy
+        
     end
 end

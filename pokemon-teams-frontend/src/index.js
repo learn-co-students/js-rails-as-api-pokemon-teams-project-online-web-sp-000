@@ -52,37 +52,27 @@ function releasePokemon(e) {
     let boot = e.target.dataset.id;
     // remove_pokemon(boot);
     // On Click - delete pokemon.id from database
-    ajax({
-        type: "DELETE",
-        // url: "{{ URL::route('someroute') }}"
-        url: "{{ URL::to('trainer/remove_pokemon') }}"
+    // const data = { username: 'example' };
 
+    fetch(`${POKEMONS_URL}/${boot}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+      // body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(`Success: ${JSON.stringify(data)}`);
+    })
+    .catch((error) => {
+
+      console.error('Errorrrr:', error);
     });
-    async function del(req, res, next) {
-  try {
-    const id = parseInt(req.params.id, 10);
- 
-    const success = await employees.delete(id);
- 
-    if (success) {
-      res.status(204).end();
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    next(err);
+    console.log(`${e.target.dataset.id} has left the party`);
+    document.querySelectorAll('[data-pokemon-id="32"]')[0].remove();
   }
-}
- 
-    // $.post(pokemon_path(boot),
-    // {
-    //     name: "Donald Duck",
-    //     city: "Duckburg"
-    // },
-    // function(data, status){
-    //     alert("Data: " + data + "\nStatus: " + status);
-    // });
-}
+
 function addPokemon() {
     console.log('Morning!');
 }

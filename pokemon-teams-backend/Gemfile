@@ -18,6 +18,7 @@ gem 'puma', '~> 4.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'pry'
 
 # Use Fast JSON API
 gem 'fast_jsonapi'
