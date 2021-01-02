@@ -4,53 +4,89 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 
 async function getapi(url) {
-    const response = await fetch(url);
-    var data = await response.json();
-    console.log(data);
-    const html = data.map(trainer => {
-        return `
-        <div class="card"><p>${trainer.name}</p>
-            <ul>
-                <li>${trainer.pokemon}</li>
-            </ul>        
-        </div>
-        `;
-    }).join('');
-    console.log(html)
-    document.querySelector('#roster').innerHTML = html;
-    // show(data);
+    let roster = document.querySelector('#roster');
+    fetch(url).then(response => response.json()).then(object => {
+        console.log(object);
+        for (const [i,trainer] of object.entries()) {
+            let trainerCard = document.createElement('div');
+            trainerCard.className = "card";
+            trainerCard.setAttribute('data-id' , i+1); 
+            trainerCard.innerHTML = trainer.name;
+            let addPokemonButton = document.createElement('button');
+            addPokemonButton.innerHTML = "Add Pokemon";
+            addPokemonButton.addEventListener("click", addPokemon);
+            addPokemonButton.setAttribute('data-id' , i+1); 
+            trainerCard.appendChild(addPokemonButton);
+
+            let teamList = document.createElement('ul');
+            trainerCard.appendChild(teamList);
+
+            for (const p of object[i].pokemon) {
+                console.log(p);
+                let pokemonMember = document.createElement('li');
+                pokemonMember.innerHTML = `${p.nickname} (${p.species})`;
+                pokemonMember.setAttribute('data-pokemon-id', p.id);
+                let releasePokemonButton = document.createElement('button');
+                releasePokemonButton.innerHTML = "Release";
+                releasePokemonButton.setAttribute('data-id' , p.id);
+                releasePokemonButton.setAttribute('class' , 'release'); 
+                // releasePokemonButton.addEventListener("click", function(e)
+                // {
+                //   alert("REMOVE: " + e.target.pokemonMember.innerHTML);
+                // });
+                releasePokemonButton.addEventListener("click", releasePokemon);
+                pokemonMember.appendChild(releasePokemonButton);
+                teamList.appendChild(pokemonMember);
+            }
+            roster.appendChild(trainerCard);
+          }
+        });
 }
 
-// Calling that async function 
-getapi(TRAINERS_URL);
-
-function fetchData() {
-    console.log("Start Fetch");
+function listTrainers() {
+    getapi(TRAINERS_URL);
 }
-fetchData();
 
-// function show(data) {
-//     let tab =  
-//         `<tr> 
-//           <th>Trainer</th> 
-//           <th>Office</th> 
-//           <th>Position</th> 
-//           <th>Salary</th> 
-//          </tr>`; 
+function releasePokemon(e) {
+    console.log(`Goodbyeeee ${e.target.dataset.id}`);
+    let boot = e.target.dataset.id;
+    // remove_pokemon(boot);
+    ajax({
+        type: "DELETE",
+        // url: "{{ URL::route('someroute') }}"
+        url: "{{ URL::to('trainer/remove_pokemon') }}"
 
-//     let member =
-//         <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
+    });
+    async function del(req, res, next) {
+  try {
+    const id = parseInt(req.params.id, 10);
+ 
+    const success = await employees.delete(id);
+ 
+    if (success) {
+      res.status(204).end();
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+ 
+    // $.post(pokemon_path(boot),
+    // {
+    //     name: "Donald Duck",
+    //     city: "Duckburg"
+    // },
+    // function(data, status){
+    //     alert("Data: " + data + "\nStatus: " + status);
+    // });
+}
+function addPokemon() {
+    console.log('Morning!');
+}
+listTrainers();
 
-    
-//     // Loop to access all rows  
-//     for (let r of data.list) { 
-//         tab += `<tr>  
-//         <td>${r.name} </td> 
-//         <td>${r.office}</td> 
-//         <td>${r.position}</td>  
-//         <td>${r.salary}</td>           
-//         </tr>`; 
-//         } 
 //     document.getElementById("trainers").innerHTML += tab; 
 
 //     {/* <div class="card" data-id="1"><p>Prince</p>
@@ -63,8 +99,4 @@ fetchData();
 //             <li>Rod (Beedrill) <button class="release" data-pokemon-id="151">Release</button></li>
 //             </ul>
 //         </div>
-
-//             <!-- table for showing data -->
-//             <table id="trainers"></table>  */}
-// }
 
