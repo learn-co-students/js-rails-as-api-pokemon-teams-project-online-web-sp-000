@@ -25,4 +25,10 @@ const renderTrainer = (trainerHash) => {
     p.innerHTML = trainerHash.name
     button.setAttribute("data-trainer-id", trainerHash.id)
     button.innerHTML = "Add Pokemon"
+
+    div.appendChild(p)
+    div.appendChild(button)
+    div.appendChild(ul)
+
+    main.appendChild(div)
 }
