@@ -36,15 +36,24 @@ const renderTrainer = (trainerHash) => {
 }
 
 const renderPokemon = (ul, pokemon) => {
-    
+
     const li = document.createElement("li")
     const button = document.createElement("button")
 
-    li.innerHTML = '${pokemon.nickname} (${pokemon.species})'
+    li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
     button.setAttribute("class", "release")
     button.setAttribute("data-pokemon-id", pokemon.id)
     button.innerHTML = "Release"
+    button.addEventListener("click", deletePokemon)
 
     li.appendChild(button)
     ul.appendChild(li)
+}
+
+const createPokemon = () => {
+
+}
+
+const deletePokemon = () => {
+
 }
