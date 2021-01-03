@@ -31,4 +31,19 @@ const renderTrainer = (trainerHash) => {
     div.appendChild(ul)
 
     main.appendChild(div)
+    trainerHash.pokemons.forEach(pokemon => renderPokemon(pokemon))
+}
+
+const renderPokemon = (pokemon) => {
+    const ul = document.querySelector('div[data-id="${pokemon.trainer_id}"]')
+    const li = document.createElement("li")
+    const button = document.createElement("button")
+
+    li.innerHTML = '${pokemon.nickname} (${pokemon.species})'
+    button.setAttribute("class", "release")
+    button.setAttribute("data-pokemon-id", pokemon.id)
+    button.innerHTML = "Release"
+
+    li.appendChild(button)
+    ul.appendChild(li)
 }
