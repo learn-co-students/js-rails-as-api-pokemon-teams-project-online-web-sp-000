@@ -8,5 +8,21 @@ document.addEventListener("DOMContentLoaded", () => loadTrainers())
 const loadTrainers = () => {
     fetch(TRAINERS_URL)
     .then(res => res.json())
-    .then(json => console.log("success"))
+    .then(json => {
+        json.forEach(trainer => renderTrainer(trainer))
+    })
+
+}
+
+const renderTrainer = (trainerHash) => {
+    const div = document.createElement("div")
+    const p = document.createElement("p")
+    const button = document.createElement("button")
+    const ul = document.createElement("ul")
+
+    div.setAttribute("class", "card")
+    div.setAttribute("data-id", trainerHash.id)
+    p.innerHTML = trainerHash.name
+    button.setAttribute("data-trainer-id", trainerHash.id)
+    button.innerHTML = "Add Pokemon"
 }
