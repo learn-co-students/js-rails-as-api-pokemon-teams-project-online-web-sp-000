@@ -10,12 +10,12 @@ async function getapi(url) {
         for (const [i,trainer] of object.entries()) {
             let trainerCard = document.createElement('div');
             trainerCard.className = "card";
-            trainerCard.setAttribute('data-id' , i+1); 
+            trainerCard.setAttribute('data-id' , trainer.id); 
             trainerCard.innerHTML = trainer.name;
             let addPokemonButton = document.createElement('button');
             addPokemonButton.innerHTML = "Add Pokemon";
             addPokemonButton.addEventListener("click", addPokemon);
-            addPokemonButton.setAttribute('data-id' , i+1); 
+            addPokemonButton.setAttribute('data-addpoke-id' , trainer.id); 
             trainerCard.appendChild(addPokemonButton);
 
             let teamList = document.createElement('ul');
@@ -28,7 +28,7 @@ async function getapi(url) {
                 pokemonMember.setAttribute('data-pokemon-id', p.id);
                 let releasePokemonButton = document.createElement('button');
                 releasePokemonButton.innerHTML = "Release";
-                releasePokemonButton.setAttribute('data-id' , p.id);
+                releasePokemonButton.setAttribute('data-releasepoke-id' , p.id);
                 releasePokemonButton.setAttribute('class' , 'release'); 
                 // releasePokemonButton.addEventListener("click", function(e)
                 // {
@@ -48,11 +48,10 @@ function listTrainers() {
 }
 
 function releasePokemon(e) {
-    console.log(`Goodbyeeee ${e.target.dataset.id}`);
-    let boot = e.target.dataset.id;
+    console.log(`Goodbyeeee ${e.target.dataset.releasepokeId}`);
+    let boot = e.target.dataset.releasepokeId;
     // remove_pokemon(boot);
     // On Click - delete pokemon.id from database
-    // const data = { username: 'example' };
 
     fetch(`${POKEMONS_URL}/${boot}`, {
       method: 'DELETE',
@@ -70,24 +69,43 @@ function releasePokemon(e) {
       console.error('Errorrrr:', error);
     });
     console.log(`${e.target.dataset.id} has left the party`);
-    document.querySelectorAll('[data-pokemon-id="32"]')[0].remove();
+    document.querySelectorAll(`[data-pokemon-id="${boot}"]`)[0].remove();
   }
 
-function addPokemon() {
-    console.log('Morning!');
+function addPokemon(e) {
+    let trainerID = e.target.dataset.addpokeId;
+    // let trainerName = boot;
+    let p = {};
+    fetch(`${POKEMONS_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({trainer: trainerID})
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(`Success: ${JSON.stringify(data)}`);
+      console.log(`d ${data}`);
+      p = data;
+      let pNew = document.createElement('li');
+      document.querySelectorAll(`[data-id="${trainerID}"]`)[0].lastElementChild.appendChild(pNew);
+
+      // pNew.innerHTML = `pop`;
+      pNew.innerHTML = `${p.nickname} (${p.species})`;
+      pNew.setAttribute('data-pokemon-id', p.id);
+      let releasePokemonButton = document.createElement('button');
+      releasePokemonButton.innerHTML = "Release";
+      releasePokemonButton.setAttribute('data-releasepoke-id' , p.id);
+      releasePokemonButton.setAttribute('class' , 'release'); 
+      releasePokemonButton.addEventListener("click", releasePokemon);
+      pNew.appendChild(releasePokemonButton);
+    })
+    .catch((error) => {
+      console.error('Errorrrr:', error);
+    });   
+    
 }
+
 listTrainers();
-
-//     document.getElementById("trainers").innerHTML += tab; 
-
-//     {/* <div class="card" data-id="1"><p>Prince</p>
-//             <button data-trainer-id="1">Add Pokemon</button>
-//             <ul>
-//             <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
-//             <li>Zachariah (Ditto) <button class="release" data-pokemon-id="141">Release</button></li>
-//             <li>Mittie (Farfetch'd) <button class="release" data-pokemon-id="149">Release</button></li>
-//             <li>Rosetta (Eevee) <button class="release" data-pokemon-id="150">Release</button></li>
-//             <li>Rod (Beedrill) <button class="release" data-pokemon-id="151">Release</button></li>
-//             </ul>
-//         </div>
 

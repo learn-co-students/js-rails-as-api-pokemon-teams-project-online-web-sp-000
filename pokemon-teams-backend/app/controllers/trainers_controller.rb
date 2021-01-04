@@ -14,7 +14,8 @@ class TrainersController < ApplicationController
     end
 
     def add_pokemon
-        if self.pokemons.count < 6
+        binding.pry
+        if Trainer.find_by(params[:id]).pokemons.count < 6
             pokemon = Pokemon.new
             p.nickname = Faker::Name.first_name
             p.species = Faker::Games::Pokemon.name
@@ -22,8 +23,6 @@ class TrainersController < ApplicationController
     end
 
     def remove_pokemon
-        # binding.pry
         render json: Pokemon.find_by(params[:id]).destroy
-        
     end
 end
