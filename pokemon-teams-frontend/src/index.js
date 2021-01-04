@@ -1,3 +1,4 @@
+
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
@@ -66,7 +67,6 @@ console.log("This is my config object!",configObj)
     fetch(POKEMONS_URL, configObj)
     .then(res => res.json())
     .then(json => {
-        console.log ("This is my json object", json)
         if (json.message){
             alert(json.message)
         } else {
