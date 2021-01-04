@@ -61,6 +61,7 @@ const deletePokemon = () => {
         headers: {
            "Content-Type": "application/json",
            "Accept": "application/json"
-        }
+        },
+        body: JSON.stringify({trainer_id: })
     }
 }
