@@ -23,9 +23,10 @@ const renderTrainer = (trainerHash) => {
     div.setAttribute("class", "card")
     div.setAttribute("data-id", trainerHash.id)
     p.innerHTML = trainerHash.name
-    button.setAttribute("data-trainer-id", trainerHash.id)
+    button.setAttribute("datatrainerid", `${trainerHash.id}`)
     button.innerHTML = "Add Pokemon"
-    
+    button.addEventListener("click", createPokemon)
+    console.log("test",trainerHash.id)
 
     div.appendChild(p)
     div.appendChild(button)
@@ -50,12 +51,9 @@ const renderPokemon = (ul, pokemon) => {
     ul.appendChild(li)
 }
 
-const createPokemon = () => {
+const createPokemon = (e) => {
     e.preventDefault()
-}
-
-const deletePokemon = () => {
-    e.preventDefault()
+    console.log("testing", this.datatrainerid)
     const configObj = {
         method: "POST",
         headers: {
@@ -64,10 +62,28 @@ const deletePokemon = () => {
         },
         body: JSON.stringify({trainer_id: e.target.dataset.trainerID})
     }
-
+console.log("This is my config object!",configObj)
     fetch(POKEMONS_URL, configObj)
     .then(res => res.json())
     .then(json => {
-        
+        console.log ("This is my json object", json)
+        if (json.message){
+            alert(json.message)
+        } else {
+            renderPokemon(json)
+        }
     })
+}
+
+const deletePokemon = (e) => {
+    e.preventDefault()
+    const configObj = {
+        method: "DELETE",
+        headers: {
+           "Content-Type": "application/json",
+           "Accept": "application/json"
+        }
+    }
+    fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonID}`, configObj)
+    e.target.parentElement.remove()
 }
