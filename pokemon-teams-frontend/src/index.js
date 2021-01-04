@@ -51,9 +51,16 @@ const renderPokemon = (ul, pokemon) => {
 }
 
 const createPokemon = () => {
-
+    e.preventDefault()
 }
 
 const deletePokemon = () => {
-
+    e.preventDefault()
+    const configObj = {
+        method: "POST",
+        headers: {
+           "Content-Type": "application/json",
+           "Accept": "application/json"
+        }
+    }
 }
