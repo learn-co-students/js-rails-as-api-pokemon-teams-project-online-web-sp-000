@@ -61,7 +61,7 @@ function createPokemon(e) {
     const configObj = {
         method: 'POST',
         headers: {
-            'ContentType': 'application/json',
+            'Content-Type': 'application/json',
             // 'Accept': 'application/json'
         },
         body: JSON.stringify({
@@ -84,7 +84,7 @@ function deletePokemon(e) {
     const configObj = {
         method: 'DELETE',
         headers: {
-            'ContentType': 'application/json',
+            'Content-Type': 'application/json',
             // 'Accept': 'application/json'
         }
     }

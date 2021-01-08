@@ -2,7 +2,6 @@ class TrainerSerializer
 
     def initialize(trainer_object)
         @trainer = trainer_object
-        # binding.pry
     end
 
     def to_serialized_json
@@ -15,6 +14,5 @@ class TrainerSerializer
             except: [:created_at, :updated_at],
         }
         @trainer.to_json(options)
-        # binding.pry
     end
 end
