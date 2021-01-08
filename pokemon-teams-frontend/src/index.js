@@ -29,6 +29,8 @@ function renderTrainer(trainer) {
     addButton.setAttribute('data-trainer-id', trainer.id)
     addButton.innerHTML = 'Add Pokemon'
 
+    addButton.addEventListener('click', createPokemon)
+
     div.appendChild(p)
     div.appendChild(addButton)
     div.appendChild(ul)
@@ -47,7 +49,45 @@ function renderPokemon(pokemon) {
     releaseButton.setAttribute('data-pokemon-id', pokemon.id)
     releaseButton.innerHTML = 'Release'
 
+    releaseButton.addEventListener('click', deletePokemon)
+
     li.appendChild(releaseButton)
     ul.appendChild(li)
 
+}
+
+function createPokemon(e) {
+    e.preventDefault()
+    const configObj = {
+        method: 'POST',
+        headers: {
+            'ContentType': 'application/json',
+            // 'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            trainer_id: e.target.dataset.trainerId
+        })
+    }
+    fetch(POKEMONS_URL, configObj)
+    .then(res => res.json())
+    .then(json => {
+        if(json.message) { 
+            alert(json.message)
+        } else { 
+            renderPokemon(json)
+        }
+    })
+}
+
+function deletePokemon(e) {
+    e.preventDefault()
+    const configObj = {
+        method: 'DELETE',
+        headers: {
+            'ContentType': 'application/json',
+            // 'Accept': 'application/json'
+        }
+    }
+    fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`, configObj)
+    e.target.parentElement.remove()
 }
