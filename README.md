@@ -2,6 +2,8 @@
 
 ## Learning Goals
 
+
+
 - Combine both a JavaScript frontend with an API-Only build of Rails
 
 ## Introduction
