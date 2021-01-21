@@ -8,17 +8,11 @@ document.addEventListener("DOMContentLoaded", () => loadTrainers())
     const loadTrainers = () => {        
         fetch (TRAINERS_URL)
         .then(res => res.json())
-        .then (json => { console.log(json)
-          json.data.forEach(trainer => renderTrainer(trainer.attributes))
-          json.data.forEach(trainer.pokemon => renderPokemon(trainer.relationships))
+        .then (json => { 
+          json.forEach(trainer => renderTrainer(trainer))
+    
         })
-    // const loadPokemons = () => {
-    //     fetch(POKEMONS_URL)
-    //     .then(res => res.json())
-    //     .then (json => { console.log(json.data.attributes)
-    //         json.data.forEach(pokemon => renderPokemon(pokemon))
-    //     })
-    // }
+   
     }
 
     const renderTrainer = (trainerHash) => {
@@ -32,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => loadTrainers())
         p.innerHTML = trainerHash.name
         button.setAttribute("data-trainer-id", trainerHash.id)
         button.innerHTML = "Add Pokemon"
+        button.addEventListener("click", createPokemon)
          
 
         div.appendChild(p)
@@ -39,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => loadTrainers())
         div.appendChild(ul)
 
         main.appendChild(div)
-        // trainerHash.relationships.pokemons.forEach(pokemon => renderPokemon(pokemon))
+       trainerHash.pokemons.forEach(pokemon => renderPokemon(pokemon))
     }
-    const renderPokemon = (pokemonHash) => {
+    const renderPokemon = (pokemon) => { 
 
         const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
         const li = document.createElement("li")
@@ -51,10 +46,43 @@ document.addEventListener("DOMContentLoaded", () => loadTrainers())
         button.setAttribute("class", "release")
         button.setAttribute("data-pokemon-id", pokemon.id)
         button.innerHTML = "Release"
+        button.addEventListener("click", deletePokemon)
 
         li.appendChild(button)
         ul.appendChild(li)
     }
-// need fetch request for Trainers
-// need fetch request for Pokemons
-// 
+    const createPokemon = (e) => {
+        e.preventDefault()
+        const configObj = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({trainer_id: e.target.dataset.trainerId})
+        }
+        fetch(POKEMONS_URL, configObj)
+        .then(res => res.json())
+        .then(json => {
+            if (json.message){
+                alert(json.message)
+            }
+            else {
+                renderPokemon(json)
+            }
+        })
+    }
+
+    const deletePokemon = (e) => {
+        e.preventDefault()
+        const configObj = {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            }
+
+        }
+        fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`, configObj)
+        e.target.parentElement.remove()
+    }
