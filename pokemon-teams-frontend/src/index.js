@@ -7,16 +7,9 @@ const POKEMONS_URL = `${BASE_URL}/pokemons`
 fetch(TRAINERS_URL).then(resp => resp.json()).then(function(json) {
 
         all = json.data
-        console.log(json);
-
         for (const trainer in all){
-
-            let div = trainer_card(trainer)
-           // let finished_card = add_pokemon_to_card(trainer, div)
-           
-            document.body.appendChild(div)
-            
-
+            let div = trainer_card(trainer)      
+            document.body.appendChild(div)   
         }
     });
 
@@ -48,33 +41,15 @@ fetch(TRAINERS_URL).then(resp => resp.json()).then(function(json) {
             newPokemon(id, ul);
          
            
-          //  old_ul.parentElement.replaceChild(new_ul, old_ul)
+          
 
         })
     
 //make the ul to hold the poke mon        
-
-  //this this this      let ul = document.createElement('ul');
-
 //add the pokemons to the ul
 
         let ul = add_pokemon_to_card(trainer)
 
-   //this this this     let pokemons_obj = all[trainer].attributes.pokemons;
-   //this this this     for(const poke of pokemons_obj){
-   //this this this         let li = document.createElement('li')
-   //this this this         li.textContent = `${poke.nickname} (${poke.species})`
-   //this this this         let release_button = document.createElement('button');
-   //this this this         release_button.textContent = "Release";
-   //this this this         release_button.classList.add("release");
-   //this this this         release_button.setAttribute('data-pokemon-id', poke.id)
-   //this this this         release_button.addEventListener("click", release_pokemon)
-   //this this this         li.appendChild(release_button);
-   //this this this         ul.appendChild(li);
-   //this this this     }
-
-
-//put it all together
 
         div.appendChild(p);
         div.appendChild(btn);
@@ -104,49 +79,30 @@ function add_pokemon_to_card(trainer){
 }
 
 
-
-function make_release_button(li){
-
-}
-
-
-
-
-
-        
-
-
 function release_pokemon(){
 
-//let poke = Pokemon.find_by(id: this.getAttribute("data-pokemon-id"))
-let pokemon_id = this.getAttribute("data-pokemon-id");
+    let pokemon_id = this.getAttribute("data-pokemon-id");
+    let configurationObject = {
+        method: "DELETE",
+        header: {
+            "Content-Type" : "application/json",
+            "Accept" : "application/json"
+        },
+        body: JSON.stringify({
+            "id" : `${pokemon_id}`,
+            "type": "pokemon"
+        })
+    };
 
-
-
-
-let configurationObject = {
-    method: "DELETE",
-    header: {
-        "Content-Type" : "application/json",
-        "Accept" : "application/json"
-    },
-    body: JSON.stringify({
-        "id" : `${pokemon_id}`,
-        "type": "pokemon"
-    })
-};
-
-fetch(`${POKEMONS_URL}/${pokemon_id}`, configurationObject).then(resp => resp.json()).then(json => json).catch(function(error) {console.log(error)})
-
-
-this.parentElement.remove(this)
+    fetch(`${POKEMONS_URL}/${pokemon_id}`, configurationObject).then(resp => resp.json()).then(json => json).catch(function(error) {console.log(error)});
+    this.parentElement.remove(this);
 }
     
 
 
 
 function newPokemon(id, ul){
-    console.log(this)
+
 
    let configurationObject = {
     method: "POST",
@@ -165,7 +121,7 @@ function newPokemon(id, ul){
       let species = json.data.attributes.species
       let poke_id =json.data.id
       console.log(poke_id)
-      //add_pokemon_to_card(trainer);
+      
       let li = document.createElement('li');
       
       li.textContent = `${nickname} (${species})`
@@ -177,9 +133,38 @@ function newPokemon(id, ul){
       li.appendChild(release_button);
       ul.appendChild(li);
       
-    //  location.reload();
     
     }).catch(error => error)
 }
     
       
+
+
+//                                           /
+//                        _,.------....___,.' ',.-.
+//                     ,-'          _,.--"        |
+//                   ,'         _.-'              .
+//                  /   ,     ,'                   `
+//                 .   /     /                     ``.
+//                 |  |     .                       \.\
+//       ____      |___._.  |       __               \ `.
+//     .'    `---""       ``"-.--"'`  \               .  \
+//    .  ,            __               `              |   .
+//    `,'         ,-"'  .               \             |    L
+//   ,'          '    _.'                -._          /    |
+//  ,`-.    ,".   `--'                      >.      ,'     |
+// . .'\'   `-'       __    ,  ,-.         /  `.__.-      ,'
+// ||:, .           ,'  ;  /  / \ `        `.    .      .'/
+// j|:D  \          `--'  ' ,'_  . .         `.__, \   , /
+/// L:_  |                 .  "' :_;                `.'.'
+//.    ""'                  """""'                    V
+// `.                                 .    `.   _,..  `
+//   `,_   .    .                _,-'/    .. `,'   __  `
+//    ) \`._        ___....----"'  ,'   .'  \ |   '  \  .
+//   /   `. "`-.--"'         _,' ,'     `---' |    `./  |
+//  .   _  `""'--.._____..--"   ,             '         |
+//  | ." `. `-.                /-.           /          ,
+//  | `._.'    `,_            ;  /         ,'          .
+// .'          /| `-.        . ,'         ,           ,
+// '-.__ __ _,','    '`-..___;-...__   ,.'\ ____.___.'
+// `"^--'..'   '-`-^-'"--    `-^-'`.''"""""`.,^.`.--' mh

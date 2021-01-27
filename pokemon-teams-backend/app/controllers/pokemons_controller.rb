@@ -9,15 +9,13 @@ class PokemonsController < ApplicationController
         if trainer.pokemons.count < 6
             name = Faker::Name.first_name
             species = Faker::Games::Pokemon.name
-           pokemon = Pokemon.create(nickname: name, species: species, trainer_id: trainer.id)    
-           render json: PokemonSerializer.new(pokemon)
+            pokemon = Pokemon.create(nickname: name, species: species, trainer_id: trainer.id)    
+            render json: PokemonSerializer.new(pokemon)
         end
     end
 
     def destroy
-       
         pokemon = Pokemon.find_by(id: params[:id])
         pokemon.delete
-      
     end
 end
