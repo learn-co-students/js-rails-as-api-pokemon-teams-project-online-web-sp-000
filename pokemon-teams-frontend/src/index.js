@@ -10,32 +10,51 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadTrainers () {
   fetch(TRAINERS_URL)
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => {
+    data.forEach(trainerHash => renderTrainer(trainerHash))
+  })
 }
 
-function renderTrainers(trainer){
-  const p = document.createElement('p');
-  p.innerText = trainer.name
+function renderTrainer(trainer) {
+  const div = document.createElement('div')
+  const p = document.createElement('p')
+  const btn = document.createElement('button')
+  const ul = document.createElement('ul')
 
-  const addBtn = document.createElement('button')
-  addBtn.setAttribute('data-trainer-id', `${trainer.id}`)
-
-  renderPokemon(trainer)
-
-  const div = document.createElement('div');
   div.setAttribute('class', 'card')
-  div.setAttribute('data-id', `${trainer.id}`)
+  div.setAttribute('data-id', trainer.id)
+  btn.setAttribute('data-trainer-id', trainer.id)
+
+  p.innerText = trainer.name
+  btn.innerText = "Add Pokemon"
+  btn.addEventListener("click", addPokemon)
+
   div.append(p, btn, ul)
+  main.append(div)
+
+  trainer.pokemons.forEach(pokemonHash => renderPokemon(pokemonHash))
 }
 
-function renderPokemon(trainer){
-  for (const element of trainer.pokemons){
-    const releaseBtn = document.createElement('button');
-    releaseBtn.setAttribute('class', 'release');
-    releaseBtn.setAttribute('data-pokemon-id', `${element.id}`);
-    releaseBtn.innerText = "Release";
-
+function renderPokemon(pokemon){
+    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
     let li = document.createElement('li');
-    li.innerText = `${element.name} (${element.nickname}) ${releaseBtn}`
-  }
+    const btn = document.createElement('button');
+
+    btn.setAttribute('class', 'release');
+    btn.setAttribute('data-pokemon-id', pokemon.id);
+    btn.innerText = "Release";
+    btn.addEventListener("click", releasePokemon)
+
+    li.innerText = `${pokemon.nickname} (${pokemon.species})`
+
+    li.append(btn)
+    ul.append(li)
+}
+
+function addPokemon() {
+
+}
+
+function releasePokemon() {
+
 }
