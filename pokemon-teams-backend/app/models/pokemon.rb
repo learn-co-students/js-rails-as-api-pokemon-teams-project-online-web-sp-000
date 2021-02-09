@@ -9,7 +9,7 @@ class Pokemon < ApplicationRecord
 
   def pokemon_count_valid?
     if self.trainer.pokemons.count >= 6
-      self.errors.add(:team_max, "Only six pokemons max.")
+      self.errors.add(:team_max, "You can only have six Pokemon. Time to release one!")
     end
   end
 end

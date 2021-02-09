@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadTrainers () {
   fetch(TRAINERS_URL)
   .then(res => res.json())
-  .then(data => {
-    data.forEach(trainerHash => renderTrainer(trainerHash))
+  .then(json => {
+    json.forEach(trainerHash => renderTrainer(trainerHash))
   })
 }
 
@@ -51,10 +51,37 @@ function renderPokemon(pokemon){
     ul.append(li)
 }
 
-function addPokemon() {
+function addPokemon(e) {
+  e.preventDefault()
+  const configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({trainer_id: e.target.dataset.trainerId})
+  }
 
+  fetch(POKEMONS_URL, configObj)
+  .then(res => res.json())
+  .then(json => {
+    if (json.message){
+      alert(json.message)
+    } else {
+      renderPokemon(json)
+    }
+  })
 }
 
-function releasePokemon() {
-
+function releasePokemon(e) {
+  e.preventDefault()
+  const configObj = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`, configObj)
+  e.target.parentElement.remove()
 }
