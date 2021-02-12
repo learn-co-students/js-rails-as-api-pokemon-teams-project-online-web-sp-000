@@ -12,6 +12,21 @@
 
     <main>
       <!-- Add our Pokemon -->
+
+      <!-- 1) When a user loads the page, they should see all trainers, with their current team of Pokemon.
+        2) Whenever a user hits "Add Pokemon" and they have space on their team, they should get a new Pokemon.
+        3) Whenever a user hits "Release Pokemon" on a specific Pokemon team, that specific Pokemon should be released from the team. -->
+      <div class="card" data-id="1"><p>Prince</p>
+        <button data-trainer-id="1">Add Pokemon</button>
+        <ul>
+          <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
+          <li>Zachariah (Ditto) <button class="release" data-pokemon-id="141">Release</button></li>
+          <li>Mittie (Farfetch'd) <button class="release" data-pokemon-id="149">Release</button></li>
+          <li>Rosetta (Eevee) <button class="release" data-pokemon-id="150">Release</button></li>
+          <li>Rod (Beedrill) <button class="release" data-pokemon-id="151">Release</button></li>
+        </ul>
+      </div>
+    
     </main>
 
     <script src="./src/index.js"></script>
