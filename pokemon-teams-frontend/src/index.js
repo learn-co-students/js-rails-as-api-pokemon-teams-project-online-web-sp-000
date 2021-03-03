@@ -29,7 +29,7 @@ function newPokemonLi(pokemon) {
   return li;
 }
 
-function addPokemon(trainer, pokemonsList) {
+function addPokemonFor(trainer, pokemonsList) {
   let configObject = {
     method: "POST",
     headers: {
@@ -43,7 +43,7 @@ function addPokemon(trainer, pokemonsList) {
 
   fetch(POKEMONS_URL, configObject)
     .then(resp => resp.json())
-    .then(pokemonObj => {
+    .then(function(pokemonObj) {
       pokemonsList.appendChild( newPokemonLi(pokemonObj) )
     })
     .catch(error => {
@@ -58,12 +58,8 @@ function renderTeams(trainer) {
   const addPokemonBtn = document.createElement('button');
   const pokemonsList = document.createElement('ul');
   const pokemons = trainer.pokemons;
-  const pokemonCount = trainer.pokemons.length;
 
-  const count = document.createElement('small');
-  count.textContent = pokemonCount;
-  
-  p.innerText = trainer.name;
+  p.textContent = trainer.name;
   
   addPokemonBtn.textContent = "Add Pokemon";
   addPokemonBtn.setAttribute('data-trainer-id', trainer.id)
@@ -73,15 +69,17 @@ function renderTeams(trainer) {
   })
 
   addPokemonBtn.addEventListener('click', function() {
+    const pokemonCount = divCard.getElementsByTagName('li').length;
+
     console.log('clicked');
     if (pokemonCount < 6) {
-      addPokemon(trainer, pokemonsList);
+      addPokemonFor(trainer, pokemonsList);
     } 
   })
   
   divCard.className = "card";
   divCard.setAttribute('data-id', trainer.id);
-  divCard.append(p, addPokemonBtn, pokemonsList, count);
+  divCard.append(p, addPokemonBtn, pokemonsList);
   main.appendChild(divCard);
 }
 
