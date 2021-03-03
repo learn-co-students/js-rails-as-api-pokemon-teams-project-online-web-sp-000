@@ -27,7 +27,7 @@ function newPokemonLi(pokemon) {
 
   releaseBtn.addEventListener('click', function () {
     deletePokemon(pokemon, li);
-  }
+  });
 
   li.appendChild(releaseBtn);
   return li;
@@ -45,16 +45,37 @@ function addPokemonFor(trainer, pokemonsList) {
     })
   };
 
-  function deletePokemon(pokemon, li) {
-    
-  }
-
   fetch(POKEMONS_URL, configObject)
     .then(resp => resp.json())
     .then(function(pokemonObj) {
       pokemonsList.appendChild( newPokemonLi(pokemonObj) )
     })
     .catch(error => {
+      console.log(error.message);
+    });
+}
+
+function deletePokemon(pokemon, li) {
+  let url = `${POKEMONS_URL}/${pokemon.id}`;
+  let configObject = {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/js",
+      "Accept": "application/js"
+    },
+    body: null
+  };
+
+  fetch(url, configObject)
+    .then(response => response.json())
+    .then(result => {
+      li.remove();
+      console.log(result.message);
+      alert(result.message);
+
+    })
+    .catch(error => {
+      alert(error.message);
       console.log(error.message);
     });
 }
