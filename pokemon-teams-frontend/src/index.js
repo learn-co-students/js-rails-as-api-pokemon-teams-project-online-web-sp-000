@@ -8,11 +8,9 @@ function getTrainers() {
     .then(response => response.json())
     .then(trainers => {
       trainers.forEach(trainer => {
-        displayTrainers(trainer);
+       console.log(trainer);
       })
     });
 }
 
-function displayTrainers(trainer) {
-  
-}
+getTrainers();
