@@ -25,6 +25,10 @@ function newPokemonLi(pokemon) {
   releaseBtn.className = "release";
   releaseBtn.setAttribute('data-pokemon-id', pokemon.id);
 
+  releaseBtn.addEventListener('click', function () {
+    deletePokemon(pokemon, li);
+  }
+
   li.appendChild(releaseBtn);
   return li;
 }
@@ -40,6 +44,10 @@ function addPokemonFor(trainer, pokemonsList) {
       trainer_id: trainer.id
     })
   };
+
+  function deletePokemon(pokemon, li) {
+    
+  }
 
   fetch(POKEMONS_URL, configObject)
     .then(resp => resp.json())
