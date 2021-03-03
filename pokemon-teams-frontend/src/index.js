@@ -9,16 +9,46 @@ function getTrainers() {
     .then(response => response.json())
     .then(trainers => {
       trainers.forEach(trainer => {
-       console.log(trainer);
+      //  console.log(trainer);
        renderTeams(trainer);
       })
     });
 }
 
-function newPokemon(pokemon) {
+function newPokemonLi(pokemon) {
   const li = document.createElement('li');
+  const releaseBtn = document.createElement('button');
+
   li.textContent = `${pokemon.nickname} (${pokemon.species})`;
+
+  releaseBtn.textContent = "Release";
+  releaseBtn.className = "release";
+  releaseBtn.setAttribute('data-pokemon-id', pokemon.id);
+
+  li.appendChild(releaseBtn);
   return li;
+}
+
+function addPokemon(trainer, pokemonsList) {
+  let configObject = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      trainer_id: trainer.id
+    })
+  };
+
+  fetch(POKEMONS_URL, configObject)
+    .then(resp => resp.json())
+    .then(pokemonObj => {
+      pokemonsList.appendChild( newPokemonLi(pokemonObj) )
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
 }
 
 
@@ -28,6 +58,10 @@ function renderTeams(trainer) {
   const addPokemonBtn = document.createElement('button');
   const pokemonsList = document.createElement('ul');
   const pokemons = trainer.pokemons;
+  const pokemonCount = trainer.pokemons.length;
+
+  const count = document.createElement('small');
+  count.textContent = pokemonCount;
   
   p.innerText = trainer.name;
   
@@ -35,12 +69,19 @@ function renderTeams(trainer) {
   addPokemonBtn.setAttribute('data-trainer-id', trainer.id)
   
   pokemons.forEach(pokemon => {
-    pokemonsList.appendChild( newPokemon(pokemon) );
+    pokemonsList.appendChild( newPokemonLi(pokemon) );
+  })
+
+  addPokemonBtn.addEventListener('click', function() {
+    console.log('clicked');
+    if (pokemonCount < 6) {
+      addPokemon(trainer, pokemonsList);
+    } 
   })
   
   divCard.className = "card";
   divCard.setAttribute('data-id', trainer.id);
-  divCard.append(p, addPokemonBtn, pokemonsList);
+  divCard.append(p, addPokemonBtn, pokemonsList, count);
   main.appendChild(divCard);
 }
 
