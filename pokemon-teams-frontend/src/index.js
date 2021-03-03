@@ -79,8 +79,8 @@ function deletePokemonLi(pokemon, li) {
     .then(response => response.json())
     .then(result => {
       li.remove();
-      console.log(result.message);
       alert(result.message);
+      console.log(result.message);
 
     })
     .catch(error => {
