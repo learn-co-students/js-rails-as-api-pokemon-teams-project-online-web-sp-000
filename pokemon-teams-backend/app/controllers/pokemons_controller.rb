@@ -5,27 +5,35 @@ class PokemonsController < ApplicationController
         render json: PokemonSerializer.new(@pokemons)
     end
 
+    def show 
+        pokemon = Pokemon.find(params[:id])
+        render json: pokemon
+    end
+
     def create
-        @pokemon = Pokemon.new(pokemon_params)
-        if pokemon.save
-            render json: PokemonSerializer.new(@pokemon), status: :accepted
-        else
-            render json: {errors: pokemon.errors.full_messages}, status: :unprocessible_entity
-        end
+        trainer = Trainer.find(params[:trainer_id])
+        pokemon = trainer.pokemons.build({
+            nickname: Faker::Name.first_name,
+            species: Faker::Games::Pokemon.name
+        })
+        render json: pokemon.save ? pokemon : {message: pokemon.errors.messages[:team_max][0]}
     end
 
    
     def destroy
-        @pokemon = Pokemon.find(params[:id])
-        @pokemon.delete
+    #  binding.pry
+        pokemon = Pokemon.find_by(id: params[:id])
+        pokemon.destroy
 
-        render json: {pokemonId: @pokemon.id}
+    #    render json: {pokemonId: @pokemon.id}
+    render json: PokemonSerializer.new(pokemon).to_serialized_json
+
     end
 
 
 
     private 
     def pokemon_params
-        params.require(:pokemon).permit(:nickname, :species, :trainer_id)    
+        params.require(:pokemon).permit(:id, :nickname, :species, :trainer_id)    
     end
 end
