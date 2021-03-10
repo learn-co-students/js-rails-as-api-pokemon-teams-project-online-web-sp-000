@@ -2,7 +2,7 @@
 
 const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
- const POKEMONS_URL = `${BASE_URL}/pokemons`
+const POKEMONS_URL = `${BASE_URL}/pokemons`
 
 const url = 'http://localhost:3000/trainers'
 const main = document.querySelector('main')
@@ -66,13 +66,13 @@ function addPokemons(e){
 
 function releasePokemon(e){
    fetch(`${POKEMONS_URL}/${e.target.id}`, 
-   { 
-      method: "DELETE", 
-   }
+      { 
+         method: "DELETE", 
+      }
    
- ) 
- const pokemon = document.getElementById(`pokemon-${e.target.id}`)
- pokemon.remove()
+   ) 
+   const pokemon = document.getElementById(`pokemon-${e.target.id}`)
+   pokemon.remove()
 
 }
 
