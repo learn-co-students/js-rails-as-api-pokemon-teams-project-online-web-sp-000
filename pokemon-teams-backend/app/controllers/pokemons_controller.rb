@@ -10,7 +10,7 @@ class PokemonsController < ApplicationController
      
       def show
         pokemon = Pokemon.find_by(id: params[:id])
-        render json: PokemonSerializer.new(pokemon).to_serialized_json
+        render json:PokemonSerializer.new(pokemon).to_serialized_json
       end
       
       def create 
@@ -19,7 +19,7 @@ class PokemonsController < ApplicationController
           species: Faker::Games::Pokemon.name,
           trainer: Trainer.find(params[:trainer_id])
         )
-        # redirect_to 'trainers'
+        render json:PokemonSerializer.new(pokemon).to_serialized_json
       end
 
       def destroy

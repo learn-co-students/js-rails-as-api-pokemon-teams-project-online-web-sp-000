@@ -38,45 +38,31 @@ function render(data){
     pokemonTrainer.appendChild(pokemonUl)
 
     trainer.pokemons.forEach(function(pokemon){
-
-        let pokemonLi = document.createElement('li')
-        pokemonLi.textContent = `${pokemon.nickname} (${pokemon.species})`
-        pokemonLi.id = `pokemon-${pokemon.id}`
-        pokemonUl.appendChild(pokemonLi)
-
-        let releasePokemonButton = document.createElement('button')
-        releasePokemonButton.className = "release"
-        releasePokemonButton.id = pokemon.id
-        releasePokemonButton.textContent = 'Release'
-        pokemonLi.appendChild(releasePokemonButton)
-
-        releasePokemonButton.addEventListener('click',releasePokemon)
-
+      pokemon.trainer_id = addButton.id
+      addPokemonToTrainer(pokemon)
     })
  });
 }
 
 function addPokemons(e){
-   
       const trainerId = {trainer_id: e.target.id}
       fetch(POKEMONS_URL, 
       { 
          method: "POST", 
-         headers: {    "Content-type": "application/json"  , "Accept": "application/json"
+         headers: { "Content-type": "application/json"  , "Accept": "application/json"
         }, 
         body: JSON.stringify(trainerId)
-
       }
-    ) 
-    .then(responce =>{
-     console.log(responce)
-      // return responce.json()
-    })
-   //  .then(data=>{
-   //     console.log(data)
-   //  })
-   //  e.preventDefault()
-}
+     )
+   .then(function(response) {
+       return response.json()
+     })
+   .then(function(data) {
+      addPokemonToTrainer(data)
+     })
+   .catch(error =>{console.log(error)})
+
+ }
 
 function releasePokemon(e){
    fetch(`${POKEMONS_URL}/${e.target.id}`, 
@@ -87,6 +73,26 @@ function releasePokemon(e){
  ) 
  const pokemon = document.getElementById(`pokemon-${e.target.id}`)
  pokemon.remove()
+
+}
+
+function addPokemonToTrainer(pokemon){
+   const  trainer = document.getElementById(`trainer-${pokemon.trainer_id}`)
+   const pokemonUl = trainer.querySelector('ul')
+
+   let pokemonLi = document.createElement('li')
+   pokemonLi.textContent = `${pokemon.nickname} (${pokemon.species})`
+   pokemonLi.id = `pokemon-${pokemon.id}`
+   pokemonUl.appendChild(pokemonLi)
+
+   let releasePokemonButton = document.createElement('button')
+   releasePokemonButton.className = "release"
+   releasePokemonButton.id = pokemon.id
+   releasePokemonButton.textContent = 'Release'
+   pokemonLi.appendChild(releasePokemonButton)
+ 
+   releasePokemonButton.addEventListener('click',releasePokemon)
+
 
 }
      fetching()
