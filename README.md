@@ -65,6 +65,7 @@ While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run
 resource sharing. To get rack-cors working, once the gem is installed, uncomment
 the following code in `config/initializers/cors.rb`:
 
+
 ```rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
