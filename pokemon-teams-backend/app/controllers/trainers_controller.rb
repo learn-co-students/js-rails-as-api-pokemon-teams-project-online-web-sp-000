@@ -6,8 +6,10 @@ class TrainersController < ApplicationController
 
     def show 
         trainer = Trainer.find_by(id: params[:id])
-        render json: trainer.to_json(:include => {
-            :pokemons => {:only => [:species, :nickname]}
-        }, :except => [:updated_at, :created_at]) 
+        if trainer
+            render json: TrainerSerializer.new(trainer)
+        else 
+            render json: { message: 'Trainer not found' }
+        end
     end
 end

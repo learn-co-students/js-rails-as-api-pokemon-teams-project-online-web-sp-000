@@ -16,70 +16,68 @@ function getTrainers() {
 
 function renderTrainer(trainer) {
     const div = document.createElement("div");
-    div.classname = "card";
-    div.setAttribute('data-id', `${trainer['id']}`)
+    div.setAttribute('class', 'card')
+    div.setAttribute('data-id', trainer.id)
 
     const p = document.createElement("p");
-    p.innerHTML = `${trainer['name']}`;
+    p.innerText = trainer.name
 
     const btn = document.createElement("button");
-    btn.setAttribute("data-trainer-id", `${trainer['id']}`);
-    btn.innerHTML = "Add Pokemon";
+    btn.setAttribute("data-trainer-id", trainer.id);
+    btn.innerText = "Add Pokemon";
 
     const ul = document.createElement("ul");
-    div.appendChild(p, btn, ul);
-    main.appendChild(div);
+    div.append(p, btn, ul);
+    main.append(div);
 
-    trainer['pokemons'].forEach(pokemon => {
-        renderPokemon(pokemon, trainer.id)
+    trainer.pokemons.forEach(pokemon => {
+        renderPokemon(pokemon)
     })
 
-    btn.addEventListener("click", (e) => {
-        addPokemon(trainer['id'])
-    });
+    btn.addEventListener("click", addPokemon);
 }
 
-function renderPokemon(pokemon, trainerId) {
-    const card = document.querySelectorAll(`[data-id="${trainerId}"]`)[0];
-    const ul = card.getElementsByTagName("ul")[0];
+function renderPokemon(pokemon) {
+    const ul = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
     const li = document.createElement("li");
-    li.innerHTML = `${pokemon['nickname']} (${pokemon['species']})`;
-    ul.appendChild("li");
+    li.innerHTML = `${pokemon.nickname} (${pokemon.species})`;
+    ul.append(li);
 
-    releaseBtn = document.createElement("button");
+    const releaseBtn = document.createElement("button");
     releaseBtn.setAttribute("class", "release");
-    releaseBtn.setAttribute("data-pokemon-id", `${pokemon['id']}`);
-    releaseBtn.innerHTML = "Release";
-    li.appendChild(releaseBtn);
+    releaseBtn.setAttribute("data-pokemon-id", pokemon.id);
+    releaseBtn.innerText = "Release";
+    li.append(releaseBtn);
 
-    releaseBtn.addEventListener('click', (event) => {
-        releasePokemon(pokemon['id'], ul, li)
-    });
+    releaseBtn.addEventListener('click', releasePokemon)
+    
 }
 
-function addPokemon(trainerId) {
+function addPokemon(e) {
+    e.preventDefault()
     let configObj = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        body: JSON.stringify({
-            "trainerId": trainerId,
+        body: JSON.stringify({trainer_id: e.target.dataset.trainerId
         })
     };
 
     fetch(POKEMONS_URL, configObj)
-    .then(function(resp) {
-        return resp.json();
+    .then(resp => resp.json())
+    .then(json => {
+        if (json.message){
+            alert(json.message)
+        } else {
+            renderPokemon(json)
+        }
     })
-    .then(function(pokemon) { renderPokemon(pokemon, trainerId) })
-    .catch(function(error) {
-        document.body.innerHTML = error.message;
-    });
 }
 
-function releasePokemon(pokemon_id, ul, li) {
+function releasePokemon(e) {
+    e.preventDefault()
     let conObj = {
         method: "DELETE", 
         headers: {
@@ -88,14 +86,6 @@ function releasePokemon(pokemon_id, ul, li) {
         }
     };
 
-    fetch(`${POKEMONS_URL}/${pokemon_id}`, conObj)
-    .then(function(resp) {
-        return resp.json();
-    })
-    .then(function() {
-        ul.removeChild(li);
-    })
-    .catch(function(error) {
-        document.body.innerHTML = error.message;
-    });
-}
+    fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`, conObj)
+    e.target.parentElement.remove()
+};
