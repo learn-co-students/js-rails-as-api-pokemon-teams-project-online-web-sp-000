@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_053245) do
   create_table "pokemons", force: :cascade do |t|
     t.string "species"
     t.string "nickname"
-    t.integer "trainer_id", null: false
+    t.integer "trainer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["trainer_id"], name: "index_pokemons_on_trainer_id"
@@ -27,5 +27,4 @@ ActiveRecord::Schema.define(version: 2021_04_15_053245) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "pokemons", "trainers"
 end
