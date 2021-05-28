@@ -27,7 +27,7 @@ organizer where we can add and remove Pokemon as needed:
 Although we have not explicitly gone over some of the CRUD actions involved in
 adding and deleting relationships in this section of content, refer back to what
 you learned about CRUD actions in Rails and use your new understanding of
-rendering JSON to try and solve these challenges.
+rendering JSON to tr y and solve these challenges.
 
 ## Goals
 
